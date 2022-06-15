@@ -1,54 +1,8 @@
-var omdbkey = '2361bbe';
 var tmdbkey = 'a7086a2a20bcc73d2ef1bcdf2f87ea74';
 var localstorageKey = 'movies-tv-watchlist';
+var tmdbImgPath = 'https://image.tmdb.org/t/p/w500';
 var bodyEl = $('body');
 var watchlist = [];
-
-var searchMovie = function (contentID) {
-    var apiUrl = 'http://www.omdbapi.com/?apikey=' + omdbkey + '&i=' + contentID;
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            console.log(response);
-            response.json().then(function (data) {
-                console.log(data);
-                addToWatchlist(data);
-            });
-        }
-    }).catch(function (error) {
-        console.log("Didn't connect");
-    })
-}
-
-
-var searchMovieTitle = function (contentName, contentType) {
-    var apiUrl = 'http://www.omdbapi.com/?apikey=' + omdbkey + '&s=' + contentName;
-    if (contentType) {
-        apiUrl += '&type=' + contentType;
-    }
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                for (var i = 0; i < data.Search.length; i++) {
-                    var imgPath;
-                    if (data.Search[i].Poster === 'N/A') {
-                        imgPath = './assets/images/No_Image_Available.jpg';
-                    } else {
-                        imgPath = data.Search[i].Poster;
-                    }
-                    var imgEl = $('<img>').attr('src', imgPath).addClass('poster-image');
-                    bodyEl.append(imgEl);
-                }
-                console.log(data);
-                searchMovie(data.Search[0].imdbID);
-            });
-        }
-    }).catch(function (error) {
-        console.log("Didn't connect");
-    })
-}
-// searchMovieTitle("fast");
-// searchMovieTitle("barry");
-// searchMovieTitle("grim adventures");
 
 var addToWatchlist = function (content) {
     var newContent = {
@@ -126,8 +80,8 @@ var getNowPlaying = function(){
 }
 // getNowPlaying();
 
-var getMovieDetails = function(){
-    var apiUrl = 'https://api.themoviedb.org/3/movie/338953?api_key='+tmdbkey+'&language=en-US'
+var getMovieDetails = function(id,type){
+    var apiUrl = 'https://api.themoviedb.org/3/'+type+'/'+id+'?api_key='+tmdbkey+'&language=en-US'
     fetch(apiUrl).then(function(response){
         if(response.ok){
             response.json().then(function(data){
@@ -138,17 +92,23 @@ var getMovieDetails = function(){
 }
 // getMovieDetails();
 
-var searchMovies = function(){
-    var apiUrl = 'https://api.themoviedb.org/3/search/multi?api_key='+tmdbkey+'&query=fast'
+var searchContent = function(query,type){
+    // forces type to be one of two valid types for api call
+    if (type !== 'tv') {
+        type = 'movie';
+    }
+    var apiUrl = 'https://api.themoviedb.org/3/search/'+type+'?api_key='+tmdbkey+'&query='+query;
     fetch(apiUrl).then(function(response){
         if(response.ok){
             response.json().then(function(data){
                 console.log(data);
+                getMovieDetails(data.results[0].id,type);
             })
         }
     })
 }
-searchMovies();
+searchContent('fast','movie');
+searchContent('barry','tv');
 
 var movieVideo = function(movieID){
     var apiUrl = 'https://api.themoviedb.org/3/movie/'+movieID+'/videos?api_key='+tmdbkey;
@@ -160,4 +120,16 @@ var movieVideo = function(movieID){
         }
     })
 }
-movieVideo(338953);
+// movieVideo(338953);
+
+var releaseDates = function(movieID){
+    var apiUrl = 'https://api.themoviedb.org/3/movie/'+movieID+'/release_dates?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74'
+    fetch(apiUrl).then(function(response){
+        if(response.ok){
+            response.json().then(function(data){
+                console.log(data);
+            })
+        }
+    })
+}
+// releaseDates(338953);
