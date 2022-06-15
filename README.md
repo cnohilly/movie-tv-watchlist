@@ -2,5 +2,5 @@
 
 ## Group 1 - Members
 * Kyle Tank
-* Stephon Treadwell
+* Stephon C Treadwell
 * Chris Nohilly
