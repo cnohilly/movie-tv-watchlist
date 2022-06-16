@@ -13,5 +13,20 @@
 
 .input, .button {
     margin-bottom: 1rem;
+}
 
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#search-input {
+    font-size: 1rem;
+    height: 2.5em;
+    border-radius: 5px;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
