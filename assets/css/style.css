@@ -1,7 +1,15 @@
-header {
-    background-color: black;
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#search-input {
+    font-size: 1rem;
+    height: 2.5em;
+    border-radius: 5px;
 }
 
 footer {
-    background-color: black;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }

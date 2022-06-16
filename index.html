@@ -8,13 +8,25 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Movie Watchlist</title>
 </head>
-<body>
-    <header class="is-flex is-flex-direction-row">
-        <h1>Movie Watchlist</h1>
+<body class="has-text-white has-background-grey-darker">
+    <header>
+        <h1 class="title is-1 has-text-white has-background-black p-3">Movie Watchlist</h1>
     </header>
+
+    <main class="has-background-grey is-flex is-flex-direction-row columns">
+        <section id="menu-section" class="has-background-dark has-text-centered p-4 px-6 is-flex is-flex-direction-column column is-one-quarter">
+            <h2 class="m-2 is-size-3">Menu</h2>
+            <a href="#" class="m-2 button is-info">Go To Watchlist</a>
+            <input id="search-input" class="m-2" type="text" placeholder="Search Movies and TV Shows"/>
+        </section>
+        
+        <section id="results-section" class="column">
+            <h2 class="is-size-3">Results</h2>
+        </section>
+    </main>
     
-    <footer class="is-flex is-flex-direction-row">
-        <h3>Made with ❤️ by Kyle Tang, Stephon Treadwell, Chris Nohilly, and Daniel Wormald.</h2>
+    <footer class="footer has-background-black has-text-centered">
+        <p class="is-size-4">Made with ❤️ by Kyle Tang, Stephon Treadwell, Chris Nohilly, and Daniel Wormald.</p>
     </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
