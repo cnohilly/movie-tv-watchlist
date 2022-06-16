@@ -1,14 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Movie WatchList</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
 </head>
 <body>
     
+    <!--Navigation Bar-->
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        
+        <div class="navbar-brand">
+          <h1 class="navbar-item has-background-black has-text-light" id="nav-logo">
+            Team One
+          </h1>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" id="nav-home">
+              Home
+            </a>
+      
+            <a class="navbar-item" id="nav-pop-mov">
+              Popular Movies
+            </a>
+
+            <a class="navbar-item" id="nav-pop-tv">
+              Popular TV Shows
+            </a>
+      
+            
+            <a class="navbar-item" id="nav-watchlist">
+              Your WatchList
+            </a>
+      
+          </div>
+    </nav>
+
+    <!--Hero Section-->
+    <section class="hero is-medium is-link">
+        <div class="hero-body">
+          <p class="title">
+            Welcome.
+          </p>
+          <p class="subtitle">
+            "Tons of movies and Tv shows to build your <strong>WatchList!</strong> Enjoy!"
+          </p>
+        </div>
+        <form class="columns is-desktop" id="inner-search-form" action="/search" method="get" accept-charset="utf-8">
+          <label class="column">
+            <div class="control column is-full">
+                <input class="input is-rounded" type="text" placeholder="Search for a movie or tv show">
+            </div>
+          </label>
+          <div class="buttons column">
+            <button class="button is-black">Search</button>
+          </div>
+          
+        </form>
+      </section>
+
+      <!--End of Hero Section-->
+
+      <!--Main Content-->
+      <main>
+       
+        <div class="column">
+          <div class="content-wrapper">
+            <div class="column">
+              <div class="column-header">
+                <h2>Search Displayed Here</h2>
+              </div>    
+            </div>
+          </div>    
+        </div>
+
+        <div class="column">
+            <div class="content-wrapper">
+              <div class="column">
+                <div class="column-header">
+                  <h2>Popular Movies</h2>
+                </div>    
+              </div>
+            </div>    
+          </div>
+
+          <div class="column">
+            <div class="content-wrapper">
+              <div class="column">
+                <div class="column-header">
+                  <h2>Popular Tv Shows</h2>
+                </div>    
+              </div>
+            </div>    
+          </div>
+
+          <div class="column">
+            <div class="content-wrapper">
+              <div class="column">
+                <div class="column-header">
+                  <h2>Your Watch WatchList</h2>
+                </div>    
+              </div>
+            </div>    
+          </div>
+        
+      
+
+      </main>
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
