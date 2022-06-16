@@ -4,14 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Document</title>
 </head>
 <body>
+
     
     <!-- Modal -->
-    <div id="movie-modal" class="modal">
-        
+    <button class="test-button button is-large is-info">
+        Test Modal Button
+    </button>
+
+    <div id="movie-modal" class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head is-flex is-flex-direction-column is-flex-wrap-wrap">
+                <button class="delete is-align-self-flex-end"></button>
+                <p class="modal-card-title">Movie Title</p>
+            </header>
+            <section class="modal-card-body">
+                <div>
+                    <img src="" alt="">
+                    <ul></ul>
+                </div>
+            </section>
+            <div>
+                <h3>Description</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi distinctio sunt, obcaecati magnam aut ex 
+                    dolorum eius dolores dolor nam ad nostrum sed iure, nulla consequuntur dignissimos fuga, aspernatur dolore?
+                </p>
+            </div>
+            <footer class="modal-card-foot is-flex is-flex is-justify-content-space-between">
+                <button class="button modal-add is-success">Add to Watchlist</button>
+                <button class="button modal-cancel is-danger">Cancel</button>
+            </footer>
+        </div>
     </div>
     <!-- Modal End -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
