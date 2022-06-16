@@ -20,24 +20,45 @@
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head is-flex is-flex-direction-column is-flex-wrap-wrap">
-                <button class="delete is-align-self-flex-end"></button>
-                <p class="modal-card-title">Movie Title</p>
+                <button class="delete is-align-self-flex-end" aria-label="close"></button>
+                <p class="modal-card-title">Spider-Man: No Way Home</p>
             </header>
             <section class="modal-card-body">
-                <div>
-                    <img src="" alt="">
-                    <ul></ul>
+                <div class="is-flex is-flex-direction-row">
+                    <img src="./assets/images/spiderman-poster-test.jpg" alt="">
+                    <ul class="is-flex is-flex-wrap-wrap is-flex-direction-column">
+                        <li id="modal-release">
+                            <h3>Release:</h3>
+                            <p>2021</p>
+                        </li>
+                        <li id="modal-type">
+                            <h3>Type:</h3>
+                            <p>Movie</p>
+                        </li>
+                        <li id="modal-genre">
+                            <h3>Genre:</h3>
+                            <p>Action, Adventure, Science Fiction</p>
+                        </li>
+                        <li id="modal-popularity">
+                            <h3>Popularity:</h3>
+                            <p>81</p>
+                        </li>
+                        <li id="modal-movie-id">
+                            <h3>ID:</h3>
+                        </li>
+
+                    </ul>
+                </div>
+                <div id="modal-movie-description">
+                    <h3>Description:</h3>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi distinctio sunt, obcaecati magnam aut ex 
+                        dolorum eius dolores dolor nam ad nostrum sed iure, nulla consequuntur dignissimos fuga, aspernatur dolore?
+                    </p>
                 </div>
             </section>
-            <div>
-                <h3>Description</h3>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi distinctio sunt, obcaecati magnam aut ex 
-                    dolorum eius dolores dolor nam ad nostrum sed iure, nulla consequuntur dignissimos fuga, aspernatur dolore?
-                </p>
-            </div>
             <footer class="modal-card-foot is-flex is-flex is-justify-content-space-between">
-                <button class="button modal-add is-success">Add to Watchlist</button>
-                <button class="button modal-cancel is-danger">Cancel</button>
+                <button id="modal-add-btn" class="button modal-add is-success">Add to Watchlist</button>
+                <button id="modal-cancel-btn" class="button modal-cancel is-danger">Cancel</button>
             </footer>
         </div>
     </div>
