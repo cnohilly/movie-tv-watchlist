@@ -50,7 +50,7 @@
             Welcome.
           </p>
           <p class="subtitle">
-            "Tons of movies and Tv shows to build your <strong>WatchList!</strong> Enjoy!"
+            "Tons of movies and Tv shows to build your <strong class="has-text-black">WatchList!</strong> Enjoy!"
           </p>
         </div>
         <form class="columns is-desktop" id="inner-search-form" action="/search" method="get" accept-charset="utf-8">
@@ -68,39 +68,37 @@
 
       <!--End of Hero Section-->
 
-      <!--Main Content-->
-      <section class="section inner-content">
-        <div class="column-wrapper">
-          <div class="content-wrapper">
-            <div class="column">
-              <div class="column-header">
-                <h2> Search Results: </h2>
-
-              </div>
-              <div class="card-container">
-                <div class="column-content">
-                  <div class="card style-1">
-                    <div class="image">
-                      <div class="wrapper">
-                        <a class="image" href="" title="">
-                          <img loading="" class="poster" src="" alt="" />
-                        </a>
-
-                      </div>
-                      <!--Enter symbol glyphics here-->
-
-                    </div>  
-                  </div>
+      <!--Cards-->
+      <section class="section">
+        <div class="container">
+          <h3 class="title has-text-centered is-size-4">Search Results: </h3>
+          <div class="columns mt-5 is-8 is-variable">
+            <div class="column is-4-table is-3-desktop">
+              <div class="card">
+                <div class="card-image has-text-centered px-6">
+                  <img src="" alt="">
                 </div>
+                <div class="card-content">
+                  <p>Fast and Furious</p>
+                  <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                  <p class="card-footer-item">
+                    <a href="" class="has-text-grey">Add To WatchList</a>
+                  </p> 
+                </footer>
               </div>
             </div>
+          </div>
+        </div>
       </section>
-      <!--End of Main Section-->
+        
+      <!--End of Cards-->
 
     
-    <footer class="footer has-background-black has-text-centered">
+    <!-- <footer class="footer has-background-black has-text-centered">
         <p class="is-size-4">Made with ❤️ by Kyle Tang, Stephon Treadwell, Chris Nohilly, and Daniel Wormald.</p>
-    </footer>
+    </footer> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
