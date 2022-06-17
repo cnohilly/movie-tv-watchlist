@@ -1,16 +1,10 @@
-<<<<<<< HEAD
-var omdbkey = '2361bbe';
-var contentList;
-=======
 var tmdbkey = 'a7086a2a20bcc73d2ef1bcdf2f87ea74';
 var localstorageKey = 'movies-tv-watchlist';
 var tmdbImgPath = 'https://image.tmdb.org/t/p/w500';
->>>>>>> 4bd650ac4a495c31daeea5f43e684fdf8db51619
 var bodyEl = $('body');
 var watchlist = [];
 var contentArray = [];
 
-<<<<<<< HEAD
 var fetchUrl = function(url){
     fetch(url).then(function(response){
         if(response.ok){
@@ -28,7 +22,6 @@ var searchMovie = function(contentID){
     var apiUrl = 'http://www.omdbapi.com/?apikey='+omdbkey+'&i='+contentID;
     var data = fetchUrl(apiUrl);
     console.log(data);
-=======
 // function to return a sorted array of the watchlist depending on passed in parameters
 var getSortedWatchlist = function (sortType, reverse) {
     var sortedWatchlist = watchlist;
@@ -64,7 +57,6 @@ var getSortedWatchlist = function (sortType, reverse) {
         sortedWatchlist.reverse();
     }
     return sortedWatchlist;
->>>>>>> 4bd650ac4a495c31daeea5f43e684fdf8db51619
 }
 
 // Returns an array of the filtered watchlist based on the provided filter type and value to filter for
@@ -81,7 +73,6 @@ var getFilteredWatchlist = function (filterType, filterValue) {
             }
             break;
     }
-<<<<<<< HEAD
     var data = fetchUrl(apiUrl).await();
     console.log(data);
     for (var i = 0; i < data.Search.length; i++){
@@ -103,7 +94,6 @@ searchMovieTitle("barry");
 var saveList = function(){
 
 }
-=======
     return filteredWatchlist;
 }
 
@@ -319,4 +309,3 @@ var releaseDates = function (movieID) {
 // }
 
 loadWatchlist();
->>>>>>> 4bd650ac4a495c31daeea5f43e684fdf8db51619
