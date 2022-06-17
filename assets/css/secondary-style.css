@@ -1,0 +1,18 @@
+html {
+    background: url("../images/background-image-1.jpg") no-repeat fixed;
+    background-size: cover;
+}
+
+.section {
+    padding: 1rem 3rem;
+}
+
+.list-container {
+    border: 1px solid white;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+}
+.card {
+    margin: 0.5rem;
+}
