@@ -3,6 +3,7 @@ var localstorageKey = 'movies-tv-watchlist';
 var tmdbImgPath = 'https://image.tmdb.org/t/p/w500';
 var bodyEl = $('body');
 var watchlist = [];
+var contentArray = [];
 
 // function to return a sorted array of the watchlist depending on passed in parameters
 var getSortedWatchlist = function (sortType, reverse) {
@@ -114,7 +115,6 @@ var loadWatchlist = function () {
     }
 }
 
-var contentArray = [];
 // function to get the details for a movie and determine how to utilize that information
 var getDetails = function (id, type, func) {
     // forces type to be one of two valid types for api call
@@ -181,7 +181,7 @@ var getDetails = function (id, type, func) {
 
 var createContentArray = function (data, type) {
     for (var i = 0; i < data.length; i++) {
-        getDetails(data[i].id, type, 'createContentArray');
+        getDetails(data[i].id, type);
     }
 }
 
@@ -197,7 +197,6 @@ var getNowPlaying = function () {
         }
     })
 }
-// getNowPlaying();
 
 // Gets the currently popular content for the specific type (movie or tv)
 var getPopular = function (type) {
@@ -212,8 +211,6 @@ var getPopular = function (type) {
         }
     });
 }
-getPopular('tv');
-getPopular('movie');
 
 // Function to append data
 var appendToResults = function (data) {
@@ -238,8 +235,6 @@ var searchContent = function (query, type) {
         }
     })
 }
-// searchContent('fast','movie');
-// searchContent('barry', 'tv');
 
 // gets the videos for the speicifc content
 var contentVideo = function (id, type) {
@@ -256,7 +251,6 @@ var contentVideo = function (id, type) {
         }
     })
 }
-// contentVideo(338953);
 
 // Global release dates for the movie id
 var releaseDates = function (movieID) {
@@ -269,11 +263,11 @@ var releaseDates = function (movieID) {
         }
     })
 }
-// releaseDates(338953);
 
-var movieIDs = [385687, 384018, 13804, 51497, 213927, 42246, 82992, 911241, 450487, 15942, 8324, 584, 13342, 113294, 9615, 38493, 49453, 545669];
-console.log(movieIDs.length);
-for (var i = 0; i < movieIDs.length; i++) {
-    getDetails(movieIDs[i], 'movie', 'addToWatchlist');
-}
+// var movieIDs = [385687, 384018, 13804, 51497, 213927, 42246, 82992, 911241, 450487, 15942, 8324, 584, 13342, 113294, 9615, 38493, 49453, 545669];
+// console.log(movieIDs.length);
+// for (var i = 0; i < movieIDs.length; i++) {
+//     getDetails(movieIDs[i], 'movie', 'addToWatchlist');
+// }
+
 loadWatchlist();
