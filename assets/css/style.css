@@ -25,3 +25,23 @@ body {
     border-radius: 5px;
 }
 
+#movie-searchable {
+    margin-top: 35px;
+}
+
+.section {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+}
+
+section img {
+    width: 200px;
+    transition: 250ms all;
+}
+
+img:hover {
+    margin-left: 0 40px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
