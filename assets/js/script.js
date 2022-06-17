@@ -49,7 +49,6 @@ var getFilteredWatchlist = function (filterType, filterValue) {
     switch (filterType) {
         case 'genre':
             for (var i = 0; i < watchlist.length; i++){
-                console.log(watchlist[i].genres, filterValue);
                 if (watchlist[i].genres && watchlist[i].genres.indexOf(filterValue) >= 0){
                     filteredWatchlist.push(watchlist[i]);
                 }
@@ -111,7 +110,6 @@ var loadWatchlist = function () {
         loadedList = JSON.parse(loadedList);
         for (var i = 0; i < loadedList.length; i++) {
             getDetails(loadedList[i].id, loadedList[i].type, 'addToWatchlist');
-            console.log(watchlist);
         }
     }
 }
@@ -126,7 +124,6 @@ var getDetails = function (id, type, func) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                // console.log(data);
                 // creates an object to store the relevant information in
                 var newObj = {
                     id: data.id,
@@ -172,8 +169,6 @@ var getDetails = function (id, type, func) {
                 if (data.poster_path) {
                     var imgEl = $('<img>').attr('src', tmdbImgPath + data.poster_path);
                     bodyEl.append(imgEl);
-                } else {
-                    console.log("None");
                 }
             })
         }
@@ -211,7 +206,6 @@ var searchContent = function (query, type) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
                 appendToResults(data.results);
                 // getDetails(data.results[0].id, type, 'addToWatchlist');
             })
