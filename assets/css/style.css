@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -25,3 +26,25 @@ body {
     border-radius: 5px;
 }
 
+=======
+.poster-image {
+    width: 200px;
+    padding: 25px;
+}
+
+/* Modal styles */
+#modal-poster-img {
+    max-width: 50%;
+    min-width: 30%;
+    border-radius: 10px;
+}
+
+.modal-card-title {
+    line-height: 1.5;
+}
+
+#movie-modal h3 {
+    font-size: 1.23em;
+    font-weight: bold;
+}
+>>>>>>> 4bd650ac4a495c31daeea5f43e684fdf8db51619
