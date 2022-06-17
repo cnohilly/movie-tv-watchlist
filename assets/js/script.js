@@ -4,59 +4,83 @@ var tmdbImgPath = 'https://image.tmdb.org/t/p/w500';
 var bodyEl = $('body');
 var watchlist = [];
 
-var addToWatchlist = function (content) {
-    watchlist.push(content);
-    // var newContent = {
-    //     title: checkContentAttribute(content.Title),
-    //     genre: checkContentAttribute(content.Genre),
-    //     type: checkContentAttribute(content.Type),
-    //     poster: checkContentAttribute(content.Poster),
-    //     release: checkContentAttribute(content.Released),
-    //     ratings: checkContentAttribute(content.Ratings),
-    //     imdbID: checkContentAttribute(content.imdbID),
-    // };
-    // watchlist.push(newContent);
-    // console.log(watchlist);
-}
-
-var checkContentAttribute = function (attribute) {
-    if (attribute) {
-        return attribute;
-    } else {
-        return false;
-    }
-}
-
+// function to return a sorted array of the watchlist depending on passed in parameters
 var getSortedWatchlist = function (sortType, reverse) {
     var sortedWatchlist = watchlist;
     if (watchlist.length <= 0) { return false; }
 
+    // Determines in which way to sort the list
     switch (sortType) {
-        case 'title': sortedWatchlist.sort(function (a, b) {
-            var aText = a.title.toUpperCase();
-            var bText = b.title.toUpperCase();
-            if (aText < bText) { return -1; }
-            else if (aText > bText) { return 1; }
-            else { return 0; }
-        });
+        case 'title':
+            sortedWatchlist.sort(function (a, b) {
+                var aText = a.title.toUpperCase();
+                var bText = b.title.toUpperCase();
+                if (aText < bText) { return -1; }
+                else if (aText > bText) { return 1; }
+                else { return 0; }
+            });
             break;
-        case 'release': sortedWatchlist.sort(function (a, b) {
-            var aDate = new Date(a.release);
-            var bDate = new Date(b.release);
-            return aDate.getTime() - bDate.getTime();
-        });
+        case 'release':
+            sortedWatchlist.sort(function (a, b) {
+                var aDate = new Date(a.release);
+                var bDate = new Date(b.release);
+                return aDate.getTime() - bDate.getTime();
+            });
+            break;
+        case 'popularity':
+            sortedWatchlist.sort(function (a, b) {
+                return a.popularity - b.popularity;
+            });
             break;
         default: return sortedWatchlist;
     }
+    // Determines if the list should be sorted in ascending or descending manner
     if (reverse) {
         sortedWatchlist.reverse();
     }
     return sortedWatchlist;
 }
 
+// Returns an array of the filtered watchlist based on the provided filter type and value to filter for
+var getFilteredWatchlist = function (filterType, filterValue) {
+    var filteredWatchlist = [];
+    if (watchlist.length <= 0) { return false; }
+
+    switch (filterType) {
+        case 'genre':
+            for (var i = 0; i < watchlist.length; i++){
+                console.log(watchlist[i].genres, filterValue);
+                if (watchlist[i].genres && watchlist[i].genres.indexOf(filterValue) >= 0){
+                    filteredWatchlist.push(watchlist[i]);
+                }
+            }
+            break;
+    }
+    return filteredWatchlist;
+}
+
+// Function to get all of the genres that exist in the current watchlist
+var getWatchlistGenres = function (){
+    if (watchlist.length <= 0) { return false; }
+    var genres = [];
+    for (var i = 0; i < watchlist.length; i++){
+        if (watchlist[i].genres){
+            for (var y = 0; y < watchlist[i].genres.length; y++){
+                if (genres.indexOf(watchlist[i].genres[y]) < 0){
+                    genres.push(watchlist[i].genres[y]);
+                }
+            }
+        }
+    }
+    return genres;
+}
+
+// converts the watchlist to a separate array storing only the id and content type
 var createSaveArray = function () {
+    // if the watchlist is empty, return false
     if (watchlist.length <= 0) { return false; }
     var saveArray = [], contentObj;
+    // loops through the watchlist and only stores the id and content type
     for (var i = 0; i < watchlist.length; i++) {
         contentObj = {
             id: watchlist[i].id,
@@ -67,44 +91,43 @@ var createSaveArray = function () {
     return saveArray;
 }
 
+// converts and saves the watchlist to localstorage with just the id and content type
 var saveWatchlist = function () {
+    // will not save anything if the watchlist is empty
     if (watchlist.length > 0) {
         localStorage.setItem(localstorageKey, JSON.stringify(createSaveArray()));
     }
 }
 
+// attempts to load the watchlist from localstorage and translate it to full information
 var loadWatchlist = function () {
-    console.log
+    // loads the saved array from localstorage
     var loadedList = localStorage.getItem(localstorageKey);
+    // if the list is empty or doesn't exist, sets watchlist to an empty array
     if (!loadedList) {
         watchlist = [];
+        // otherwise the list is parsed and looped through to get more details about each piece of content
     } else {
         loadedList = JSON.parse(loadedList);
-        console.log(watchlist);
         for (var i = 0; i < loadedList.length; i++) {
-            getDetails(loadedList[i].id, loadedList[i].type,'addToWatchlist');
+            getDetails(loadedList[i].id, loadedList[i].type, 'addToWatchlist');
             console.log(watchlist);
         }
     }
 }
 
-var getNowPlaying = function () {
-    var apiUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key=' + tmdbkey + '&language=en-US&page=1'
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
-            })
-        }
-    })
-}
-// getNowPlaying();
-
+// function to get the details for a movie and determine how to utilize that information
 var getDetails = function (id, type, func) {
+    // forces type to be one of two valid types for api call
+    if (type !== 'tv') {
+        type = 'movie';
+    }
     var apiUrl = 'https://api.themoviedb.org/3/' + type + '/' + id + '?api_key=' + tmdbkey + '&language=en-US'
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
+                // console.log(data);
+                // creates an object to store the relevant information in
                 var newObj = {
                     id: data.id,
                     type: type,
@@ -113,11 +136,15 @@ var getDetails = function (id, type, func) {
                     poster: data.poster_path,
                     backdrop: data.backdrop_path
                 }
-                if (data.release_date) {
+                if (type === 'movie') {
+                    newObj.title = data.title;
                     newObj.release = data.release_date;
-                } else if (data.first_air_date) {
+                } else if (type === 'tv') {
+                    newObj.title = data.name;
                     newObj.release = data.first_air_date;
                 }
+                var dateString = newObj.release.split('-');
+                newObj.release = dateString[1] + '/' + dateString[2] + '/' + dateString[0];
 
                 if (data.genres) {
                     var genres = [];
@@ -125,12 +152,20 @@ var getDetails = function (id, type, func) {
                         genres.push(data.genres[i].name);
                     }
                     newObj.genres = genres;
+                } else {
+                    data.genres = null;
                 }
 
                 switch (func) {
-                    case 'addToWatchlist': watchlist.push(newObj);
+                    case 'addToWatchlist':
+                        watchlist.push(newObj);
                         break;
-                    default: console.log(data);
+                    case 'appendImage':
+                        var imgEl = $('<img>').attr('src', tmdbImgPath + data.poster_path);
+                        bodyEl.append(imgEl);
+                        break;
+                    default:
+                        console.log(data);
                         break;
                 }
 
@@ -144,14 +179,29 @@ var getDetails = function (id, type, func) {
         }
     })
 }
-// getDetails();
-var appendToResults = function(data){
-    console.log('called');
-    for (var i = 0; i < data.length; i++){
+
+// Gets the currently playing movies
+var getNowPlaying = function () {
+    var apiUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key=' + tmdbkey + '&language=en-US&page=1'
+    fetch(apiUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                // returns an object with a results property
+                appendToResults(data.results);
+            })
+        }
+    })
+}
+// getNowPlaying();
+
+// Function to append data
+var appendToResults = function (data) {
+    for (var i = 0; i < data.length; i++) {
         console.log(data[i]);
     }
 }
 
+// Searches for content of the specific type using the passed in query
 var searchContent = function (query, type) {
     // forces type to be one of two valid types for api call
     if (type !== 'tv') {
@@ -162,17 +212,22 @@ var searchContent = function (query, type) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
-                appendToResults(data);
+                appendToResults(data.results);
                 // getDetails(data.results[0].id, type, 'addToWatchlist');
             })
         }
     })
 }
-searchContent('fast','movie');
-// searchContent('barry','tv');
+// searchContent('fast','movie');
+// searchContent('barry', 'tv');
 
-var movieVideo = function (movieID) {
-    var apiUrl = 'https://api.themoviedb.org/3/movie/' + movieID + '/videos?api_key=' + tmdbkey;
+// gets the videos for the speicifc content
+var contentVideo = function (id, type) {
+    // forces type to be one of two valid types for api call
+    if (type !== 'tv') {
+        type = 'movie';
+    }
+    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/' + id + '/videos?api_key=' + tmdbkey;
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -181,8 +236,9 @@ var movieVideo = function (movieID) {
         }
     })
 }
-// movieVideo(338953);
+// contentVideo(338953);
 
+// Global release dates for the movie id
 var releaseDates = function (movieID) {
     var apiUrl = 'https://api.themoviedb.org/3/movie/' + movieID + '/release_dates?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74'
     fetch(apiUrl).then(function (response) {
@@ -193,11 +249,11 @@ var releaseDates = function (movieID) {
         }
     })
 }
-releaseDates(338953);
+// releaseDates(338953);
 
-// var movieIDs = [385687,384018,13804,51497,213927,42246,82992,911241,450487,15942,8324,584,13342,113294,9615,38493,49453,545669];
-// console.log(movieIDs.length);
-// for (var i = 0; i < movieIDs.length; i++){
-//     getDetails(movieIDs[i],'movie');
-// }
+var movieIDs = [385687, 384018, 13804, 51497, 213927, 42246, 82992, 911241, 450487, 15942, 8324, 584, 13342, 113294, 9615, 38493, 49453, 545669];
+console.log(movieIDs.length);
+for (var i = 0; i < movieIDs.length; i++) {
+    getDetails(movieIDs[i], 'movie', 'addToWatchlist');
+}
 loadWatchlist();
