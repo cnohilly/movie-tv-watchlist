@@ -48,8 +48,8 @@ var getFilteredWatchlist = function (filterType, filterValue) {
 
     switch (filterType) {
         case 'genre':
-            for (var i = 0; i < watchlist.length; i++){
-                if (watchlist[i].genres && watchlist[i].genres.indexOf(filterValue) >= 0){
+            for (var i = 0; i < watchlist.length; i++) {
+                if (watchlist[i].genres && watchlist[i].genres.indexOf(filterValue) >= 0) {
                     filteredWatchlist.push(watchlist[i]);
                 }
             }
@@ -59,13 +59,13 @@ var getFilteredWatchlist = function (filterType, filterValue) {
 }
 
 // Function to get all of the genres that exist in the current watchlist
-var getWatchlistGenres = function (){
+var getWatchlistGenres = function () {
     if (watchlist.length <= 0) { return false; }
     var genres = [];
-    for (var i = 0; i < watchlist.length; i++){
-        if (watchlist[i].genres){
-            for (var y = 0; y < watchlist[i].genres.length; y++){
-                if (genres.indexOf(watchlist[i].genres[y]) < 0){
+    for (var i = 0; i < watchlist.length; i++) {
+        if (watchlist[i].genres) {
+            for (var y = 0; y < watchlist[i].genres.length; y++) {
+                if (genres.indexOf(watchlist[i].genres[y]) < 0) {
                     genres.push(watchlist[i].genres[y]);
                 }
             }
@@ -114,6 +114,7 @@ var loadWatchlist = function () {
     }
 }
 
+var contentArray = [];
 // function to get the details for a movie and determine how to utilize that information
 var getDetails = function (id, type, func) {
     // forces type to be one of two valid types for api call
@@ -125,7 +126,7 @@ var getDetails = function (id, type, func) {
         if (response.ok) {
             response.json().then(function (data) {
                 // creates an object to store the relevant information in
-                var newObj = {
+                var  contentObj = {
                     id: data.id,
                     type: type,
                     title: data.title,
@@ -134,32 +135,35 @@ var getDetails = function (id, type, func) {
                     backdrop: data.backdrop_path
                 }
                 if (type === 'movie') {
-                    newObj.title = data.title;
-                    newObj.release = data.release_date;
+                     contentObj.title = data.title;
+                     contentObj.release = data.release_date;
                 } else if (type === 'tv') {
-                    newObj.title = data.name;
-                    newObj.release = data.first_air_date;
+                     contentObj.title = data.name;
+                     contentObj.release = data.first_air_date;
                 }
-                var dateString = newObj.release.split('-');
-                newObj.release = dateString[1] + '/' + dateString[2] + '/' + dateString[0];
+                var dateString =  contentObj.release.split('-');
+                 contentObj.release = dateString[1] + '/' + dateString[2] + '/' + dateString[0];
 
                 if (data.genres) {
                     var genres = [];
                     for (var i = 0; i < data.genres.length; i++) {
                         genres.push(data.genres[i].name);
                     }
-                    newObj.genres = genres;
+                     contentObj.genres = genres;
                 } else {
                     data.genres = null;
                 }
 
                 switch (func) {
                     case 'addToWatchlist':
-                        watchlist.push(newObj);
+                        watchlist.push( contentObj);
                         break;
                     case 'appendImage':
                         var imgEl = $('<img>').attr('src', tmdbImgPath + data.poster_path);
                         bodyEl.append(imgEl);
+                        break;
+                    case 'createContentArray':
+                        contentArray.push( contentObj);
                         break;
                     default:
                         console.log(data);
@@ -175,6 +179,12 @@ var getDetails = function (id, type, func) {
     })
 }
 
+var createContentArray = function (data, type) {
+    for (var i = 0; i < data.length; i++) {
+        getDetails(data[i].id, type, 'createContentArray');
+    }
+}
+
 // Gets the currently playing movies
 var getNowPlaying = function () {
     var apiUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key=' + tmdbkey + '&language=en-US&page=1'
@@ -188,6 +198,22 @@ var getNowPlaying = function () {
     })
 }
 // getNowPlaying();
+
+// Gets the currently popular content for the specific type (movie or tv)
+var getPopular = function (type) {
+    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/popular?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74&language=en-US';
+    fetch(apiUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                // returns an object with a results property
+                console.log(data);
+                createContentArray(data.results, type);
+            })
+        }
+    });
+}
+getPopular('tv');
+getPopular('movie');
 
 // Function to append data
 var appendToResults = function (data) {
