@@ -1,0 +1,13 @@
+#modal-poster-img {
+    width: 50%;
+    border-radius: 10px;
+}
+
+.modal-card-title {
+    line-height: 1.5;
+}
+
+#movie-modal h3 {
+    font-size: 1.23em;
+    font-weight: bold;
+}
