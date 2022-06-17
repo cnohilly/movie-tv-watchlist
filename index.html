@@ -51,12 +51,12 @@
         </div>
         <form class="columns is-desktop" id="inner-search-form" action="/search" method="get" accept-charset="utf-8">
           <label class="column">
-            <div class="control column is-full">
-                <input class="input is-rounded" type="text" placeholder="Search for a movie or tv show">
+            <div class="control column is-full form-group">
+                <input class="input is-rounded" type="text" placeholder="Search for a movie or tv show" id="inputValue">
             </div>
           </label>
           <div class="buttons column mt-3">
-            <button class="button is-black">Search</button>
+            <button class="button is-black" type="submit" id="search">Search</button>
           </div>
           
         </form>
@@ -71,13 +71,13 @@
           <div class="columns mt-5 is-8 is-variable">
             <div class="column is-3-table is-3-desktop">
               <div class="card">
-                <div class="card-image has-text-centered px-6">
+                <div class="card-image has-text-centered px-6" id="movie-searchable">
                   <!--MOVIE POSTER HERE-->
-                  <img src="" alt="">
+                  
                 </div>
                 <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
+                  <p id="movie-title">Fast and Furious</p>
+                  <p class="title is-size-5" id="movie-release-date">2001</p>
                 </div>
                 <footer class="card-footer">
                   <p class="card-footer-item">
@@ -373,6 +373,6 @@
         <p class="is-size-4">Made with ❤️ by Kyle Tang, Stephon Treadwell, Chris Nohilly, and Daniel Wormald.</p>
     </footer> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./assets/js/script.js"></script>
+    <script src="assets/js/homepage.js"></script>
 </body>
 </html>
