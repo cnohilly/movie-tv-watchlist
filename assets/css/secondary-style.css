@@ -3,16 +3,28 @@ html {
     background-size: cover;
 }
 
-.section {
-    padding: 1rem 3rem;
+section h2 {
+    border-bottom: 1.5px solid gold;
 }
 
 .list-container {
-    border: 1px solid white;
     border-radius: 5px;
-    height: auto;
+    min-height: 200px;
     width: 100%;
+    background-color: rgb(0, 0, 0, 0.3);
 }
-.card {
-    margin: 0.5rem;
+
+#to-watch-list, #in-progress-list, #completed-list {
+    gap: 1rem;
+}
+
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .card {
+        max-width: 43vw;
+    }
 }
