@@ -51,12 +51,12 @@
         </div>
         <form class="columns is-desktop" id="inner-search-form" action="/search" method="get" accept-charset="utf-8">
           <label class="column">
-            <div class="control column is-full">
-                <input class="input is-rounded" type="text" placeholder="Search for a movie or tv show">
+            <div class="control column is-full form-group">
+                <input class="input is-rounded" type="text" placeholder="Search for a movie" id="inputValue">
             </div>
           </label>
           <div class="buttons column mt-3">
-            <button class="button is-black">Search</button>
+            <button class="button is-black" type="submit" id="search">Search</button>
           </div>
           
         </form>
@@ -64,312 +64,26 @@
 
       <!--End of Hero Section-->
 
-      <!--Search Results Cards-->
-      <section class="section">
-        <div class="container">
-          <h3 class="title has-text-centered is-size-4">Search Results</h3>
-          <div class="columns mt-5 is-8 is-variable">
-            <div class="column is-3-table is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <!--MOVIE POSTER HERE-->
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
+      <!--Search Results Title-->       
+            <section class="section">
+              <div class="container">
+                <h3 class="title has-text-centered is-size-4">Search Results</h3>
               </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop"></div>
-          </div>
+            </section> 
+
+      <!--Search Results Displayed-->
+      
+        <div class="container" id="movie-searchable">
+         <!--Movies Will Be Displayed Here Via the DOM-->
+          
         </div>
-      </section>
+
+          
+            
+            
         
       <!--End of Search Results Cards-->
 
-      <!--Popular Movies-->
-
-      <section class="section">
-        <div class="container">
-          <h3 class="title has-text-centered is-size-4" id="popular-movies">Popular Movies</h3>
-          <div class="columns mt-5 is-8 is-variable">
-            <div class="column is-3-table is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop"></div>
-          </div>
-        </div>
-      </section>
-
-      <!--End of Popular Movies-->
-
-      <!--Popular Tv Shows-->
-
-      <section class="section">
-        <div class="container">
-          <h3 class="title has-text-centered is-size-4" id="popular-tv">Popular Tv Shows</h3>
-          <div class="columns mt-5 is-8 is-variable">
-            <div class="column is-3-table is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop"></div>
-          </div>
-        </div>
-      </section>
-
-      <!--End of Popular Tv Shows-->
-
-      <!--Start of Top Rated-->
-      <section class="section">
-        <div class="container">
-          <h3 class="title has-text-centered is-size-4" id="top-rated">Top Rated</h3>
-          <div class="columns mt-5 is-8 is-variable">
-            <div class="column is-3-table is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop">
-              <div class="card">
-                <div class="card-image has-text-centered px-6">
-                  <img src="" alt="">
-                </div>
-                <div class="card-content">
-                  <p>Fast and Furious</p>
-                  <p class="title is-size-5">2001</p>
-                </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <a href="" class="has-text-blue">Add To WatchList</a>
-                  </p> 
-                </footer>
-              </div>
-            </div>
-            <div class="column is-3-tablet is-3-desktop"></div>
-          </div>
-        </div>
-      </section>
-      <!--End of Top Rated-->
-      
       
     <!-- <footer class="footer has-background-black has-text-centered">
         <p class="is-size-4">Made with ❤️ by Kyle Tang, Stephon Treadwell, Chris Nohilly, and Daniel Wormald.</p>
@@ -429,8 +143,12 @@
     </div>
     <!-- Modal End -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<<<<<<< HEAD
     <script src="assets/js/script.js"></script>
     <script src="assets/js/omdbscript.js"></script>
   
+=======
+    <script src="assets/js/homepage.js"></script>
+>>>>>>> feature/cards
 </body>
 </html>
