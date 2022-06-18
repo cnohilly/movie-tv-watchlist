@@ -10,6 +10,8 @@ section h2 {
 .list-container {
     border-radius: 5px;
     min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
     width: 100%;
     background-color: rgb(0, 0, 0, 0.3);
 }
@@ -22,6 +24,10 @@ section h2 {
 @media screen and (max-width: 575px) {
     .section {
         padding: 3rem 1rem;
+    }
+
+    .list-container {
+        justify-content: space-evenly;
     }
 
     .card {
