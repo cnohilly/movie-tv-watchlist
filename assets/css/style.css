@@ -3,23 +3,6 @@
     padding: 25px;
 }
 
-/* Modal styles */
-#modal-poster-img {
-    max-width: 50%;
-    min-width: 30%;
-    border-radius: 10px;
-}
-
-.modal-card-title {
-    line-height: 1.5;
-}
-
-#movie-modal h3 {
-    font-size: 1.23em;
-    font-weight: bold;
-}
-
-<<<<<<< HEAD
 #search-input {
     font-size: 1rem;
     height: 2.5em;
@@ -46,7 +29,35 @@ img:hover {
     transform: scale(1.2);
     cursor: pointer;
 }
-=======
+
+/* Modal Styles */
+#movie-modal section img {
+    width: auto;
+    transition: none;
+}
+
+#movie-modal img:hover {
+    margin-left: 0;
+    transform: none;
+    cursor: default;
+}
+
+#modal-poster-img {
+    max-width: 50%;
+    min-width: 30%;
+    border-radius: 10px;
+}
+
+.modal-card-title {
+    line-height: 1.5;
+}
+
+#movie-modal h3 {
+    font-size: 1.23em;
+    font-weight: bold;
+}
+/* Modal Styles End */
+
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
 /* Try not to touch this or else the navbar will break on smaller screens! */
 @media screen and (max-width: 1023px) {
@@ -63,4 +74,3 @@ img:hover {
         padding: 0.5rem 5rem;
     }
 }
->>>>>>> 44e5b3695fc563074b11eeffa927264bf673b385
