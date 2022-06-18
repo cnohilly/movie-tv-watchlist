@@ -1,0 +1,36 @@
+html {
+    background: url("../images/background-image-1.jpg") no-repeat fixed;
+    background-size: cover;
+}
+
+section h2 {
+    border-bottom: 1.5px solid gold;
+}
+
+.list-container {
+    border-radius: 5px;
+    min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
+    width: 100%;
+    background-color: rgba(122, 122, 122, 0.3);
+}
+
+#to-watch-list, #in-progress-list, #completed-list {
+    gap: 1rem;
+}
+
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .list-container {
+        justify-content: space-evenly;
+    }
+
+    .card {
+        max-width: 43vw;
+    }
+}
