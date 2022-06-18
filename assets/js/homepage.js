@@ -96,5 +96,4 @@ console.log("Value ", value);
     
 }
 
-
-
+// modal
