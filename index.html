@@ -6,10 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Document</title>
+    <title>Movie WatchList</title>
 </head>
 <body>
+    
+    <!--Navigation Bar-->
 
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        
+        <div class="navbar-brand has-background-black">
+			<h1 class="navbar-item has-background-black has-text-light" id="nav-logo">
+				Team One
+			</h1>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+        	<div class="navbar-start">
+
+				<a class="navbar-item has-text-centered" id="nav-pop-mov" href="./watchlist.html">
+					Watchlist
+				</a>
+
+				<a class="navbar-item has-text-centered" id="nav-pop-mov" href="#popular-movies">
+					Popular Movies
+				</a>
+
+				<a class="navbar-item has-text-centered" id="nav-pop-tv" href="#popular-tv">
+					Popular TV Shows
+				</a>
+		
+				<a class="navbar-item has-text-centered" id="nav-watchlist" href="#top-rated">
+					Top Rated
+				</a>
+
+			</div>
+        </div>
+    </nav>
+
+    <!--Hero Section-->
+    <section class="hero is-medium is-link">
+        <div class="hero-body">
+			<p class="title">
+				Welcome.
+			</p>
+			<p class="subtitle">
+				"Tons of movies and Tv shows to build your <strong class="has-text-black">WatchList!</strong> Enjoy!"
+			</p>
+        </div>
+        <form class="columns is-desktop" id="inner-search-form" action="/search" method="get" accept-charset="utf-8">
+        	<label class="column">
+            <div class="control column is-full form-group">
+            	<input class="input is-rounded" type="text" placeholder="Search for a movie" id="inputValue">
+            </div>
+        	</label>
+			<div class="buttons column mt-3">
+				<button class="button is-black" type="submit" id="search">Search</button>
+			</div>
+        </form>
+    </section>
+
+    <!--End of Hero Section-->
+
+    <!--Search Results Title-->       
+	<section class="section">
+		<div class="container">
+			<h3 class="title has-text-centered is-size-4">Search Results</h3>
+		</div>
+	</section> 
+
+	<!--Search Results Displayed-->
+	
+	<div class="container movie-poster" id="movie-searchable">
+		<!--Movies Will Be Displayed Here Via the DOM-->
+		
+	</div>
+
+          
+            
+            
+        
+    <!--End of Search Results Cards-->
     
     <!-- Modal -->
     <!-- To display modal, add 'is-active' to modal class -->
@@ -19,13 +95,13 @@
             <header class="modal-card-head is-flex is-flex-direction-column is-flex-wrap-wrap has-background-info-dark">
                 <!-- Modal title -->
                 <h2 class="modal-card-title has-text-weight-bold has-text-white">Spider-Man: No Way Home</h2>
-            </header>
+                </header>
             <section class="modal-card-body has-background-dark has-text-white">
                 <div class="is-flex is-flex-direction-row">
                     <!-- Modal image -->
-                    <img id="modal-poster-img" class="m-2" src="./assets/images/spiderman-poster-test.jpg" alt="">
+                        <img id="modal-poster-img" class="m-2" src="./assets/images/spiderman-poster-test.jpg" alt="">
                     <ul class="m-2 is-flex is-flex-wrap-wrap is-flex-direction-column">
-                        <!-- Modal content s-->
+                        <!-- Modal content -->
                         <li id="modal-release">
                             <h3>Release:</h3>
                             <p>2021</p>
@@ -43,9 +119,9 @@
                             <p>81%</p>
                         </li>
                     </ul>
-                </div>
+                </div> 
                 <!-- Modal description -->
-                <div id="modal-movie-description" class="m-2">
+                       <div id="modal-movie-description" class="m-2">
                     <h3>Description:</h3>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi distinctio sunt, obcaecati magnam aut ex 
                         dolorum eius dolores dolor nam ad nostrum sed iure, nulla consequuntur dignissimos fuga, aspernatur dolore?
@@ -59,7 +135,10 @@
         </div>
     </div>
     <!-- Modal End -->
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/omdbscript.js"></script>
+    <script src="assets/js/homepage.js"></script>
 </body>
 </html>
