@@ -1,7 +1,9 @@
 html {
     background: url("../images/background-image-1.jpg") no-repeat fixed;
     background-size: cover;
+    background-position: center top;
 }
+
 
 section h2 {
     border-bottom: 1.5px solid gold;
@@ -10,14 +12,24 @@ section h2 {
 .list-container {
     border-radius: 5px;
     min-height: 200px;
-    max-height: 400px;
     overflow: auto;
     width: 100%;
     background-color: rgba(122, 122, 122, 0.3);
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    justify-content: space-between;
+    align-content: start;
+    gap: 2rem;
 }
 
-#to-watch-list, #in-progress-list, #completed-list {
-    gap: 1rem;
+.card-content {
+    padding: 1rem;
+}
+
+.card img {
+    height: 20vw;
+    width: 100%;
+    overflow: hidden;
 }
 
 /* Modal styles */
@@ -37,21 +49,6 @@ section h2 {
 }
 /* Modal Styles End */
 
-/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
-@media screen and (max-width: 575px) {
-    .section {
-        padding: 3rem 1rem;
-    }
-
-    .list-container {
-        justify-content: space-evenly;
-    }
-
-    .card {
-        max-width: 43vw;
-    }
-}
-
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
 /* Try not to touch this or else the navbar will break on smaller screens! */
 @media screen and (max-width: 1023px) {
@@ -66,5 +63,20 @@ section h2 {
 
     .navbar-start a {
         padding: 0.5rem 5rem;
+    }
+}
+
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .list-container {
+        justify-content: space-evenly;
+    }
+
+    .card {
+        max-width: 43vw;
     }
 }
