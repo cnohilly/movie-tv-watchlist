@@ -125,45 +125,50 @@ var getDetails = function (id, type, func) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
+                console.log(data);
                 // creates an object to store the relevant information in
-                var  contentObj = {
+                var contentObj = {
                     id: data.id,
                     type: type,
                     title: data.title,
-                    popularity: data.popularity,
+                    popularity: data.vote_average,
+                    overview: data.overview,
                     poster: data.poster_path,
                     backdrop: data.backdrop_path
                 }
                 if (type === 'movie') {
-                     contentObj.title = data.title;
-                     contentObj.release = data.release_date;
+                    contentObj.title = data.title;
+                    contentObj.release = data.release_date;
                 } else if (type === 'tv') {
-                     contentObj.title = data.name;
-                     contentObj.release = data.first_air_date;
+                    contentObj.title = data.name;
+                    contentObj.release = data.first_air_date;
                 }
-                var dateString =  contentObj.release.split('-');
-                 contentObj.release = dateString[1] + '/' + dateString[2] + '/' + dateString[0];
+                var dateString = contentObj.release.split('-');
+                contentObj.release = dateString[1] + '/' + dateString[2] + '/' + dateString[0];
 
                 if (data.genres) {
                     var genres = [];
                     for (var i = 0; i < data.genres.length; i++) {
                         genres.push(data.genres[i].name);
                     }
-                     contentObj.genres = genres;
+                    contentObj.genres = genres;
                 } else {
                     data.genres = null;
                 }
 
                 switch (func) {
                     case 'addToWatchlist':
-                        watchlist.push( contentObj);
+                        watchlist.push(contentObj);
                         break;
                     case 'appendImage':
                         var imgEl = $('<img>').attr('src', tmdbImgPath + data.poster_path);
                         bodyEl.append(imgEl);
                         break;
                     case 'createContentArray':
-                        contentArray.push( contentObj);
+                        contentArray.push(contentObj);
+                        break;
+                    case 'createModal':
+                        createModal(contentObj);
                         break;
                     default:
                         console.log(data);
@@ -264,6 +269,36 @@ var releaseDates = function (movieID) {
     })
 }
 
+var displayModal = function(active){
+    var modal = $('#movie-modal');
+    if (active){
+        if (!modal.hasClass('is-active')){
+            modal.addClass('is-active');
+        }
+    } else {
+        if (modal.hasClass('is-active')){
+            modal.removeClass('is-active');
+        }
+    }
+}
+
+var createModal = function (contentObj) {
+    $('.modal-card-title').text(contentObj.title);
+    $('#modal-poster-img').attr('src', tmdbImgPath+contentObj.poster);
+    $('#modal-release p').text(contentObj.release);
+    if (contentObj.type === 'movie'){
+        $('#modal-type p').text(contentObj.type[0].toUpperCase() + contentObj.type.substring(1));
+    } else if (contentObj.type === 'tv') {
+        $('#modal-type p').text(contentObj.type.toUpperCase());
+    }
+    $('#modal-genre', contentObj.genres.join(', '));
+    $('#modal-popularity p').text(contentObj.popularity*10 + '%');
+    $('#modal-movie-description p').text(contentObj.overview);
+    displayModal(true);
+}
+
+getDetails(73107,'tv','createModal');
+
 // var movieIDs = [385687, 384018, 13804, 51497, 213927, 42246, 82992, 911241, 450487, 15942, 8324, 584, 13342, 113294, 9615, 38493, 49453, 545669];
 // console.log(movieIDs.length);
 // for (var i = 0; i < movieIDs.length; i++) {
@@ -271,3 +306,7 @@ var releaseDates = function (movieID) {
 // }
 
 loadWatchlist();
+
+$('#modal-cancel-btn').on('click',function(){
+    displayModal(false);
+});
