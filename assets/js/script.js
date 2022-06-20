@@ -4,6 +4,11 @@ var tmdbImgPath = 'https://image.tmdb.org/t/p/w500';
 var bodyEl = $('body');
 var watchlist = [];
 var contentArray = [];
+var searchContainer = $('#search-results-container');
+var popMovieContainer = $('#pop-movies-container');
+var popTVContainer = $('#pop-tv-container');
+var topMovieContainer = $('#top-movies-container');
+var topTVContainer = $('#top-tv-container');
 
 // function to return a sorted array of the watchlist depending on passed in parameters
 var getSortedWatchlist = function (sortType, reverse) {
@@ -125,7 +130,6 @@ var getDetails = function (id, type, func) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
                 // creates an object to store the relevant information in
                 var contentObj = {
                     id: data.id,
@@ -170,23 +174,48 @@ var getDetails = function (id, type, func) {
                     case 'createModal':
                         createModal(contentObj);
                         break;
+                    case 'searchCard':
+                        createCard(contentObj, searchContainer);
+                        break;
+                    case 'popMovieCard':
+                        createCard(contentObj, popMovieContainer);
+                        break;
+                    case 'popTVCard':
+                        createCard(contentObj, popTVContainer);
+                        break;
+                    case 'topMovieCard':
+                        createCard(contentObj, topMovieContainer);
+                        break;
+                    case 'topTVCard':
+                        createCard(contentObj, topTVContainer);
+                        break;
                     default:
                         console.log(data);
                         break;
-                }
-
-                if (data.poster_path) {
-                    var imgEl = $('<img>').attr('src', tmdbImgPath + data.poster_path);
-                    bodyEl.append(imgEl);
                 }
             })
         }
     })
 }
 
-var createContentArray = function (data, type) {
+var forceType = function(type){
+    if (type !== 'tv') {
+        type = 'movie';
+    }
+    return type;
+}
+
+var typeFormat = function(type){
+    if (type === 'movie') {
+        return type[0].toUpperCase() + type.substring(1);
+    } else if (type === 'tv') {
+        return type.toUpperCase();
+    }
+}
+
+var createContentCards = function (data, type, func) {
     for (var i = 0; i < data.length; i++) {
-        getDetails(data[i].id, type);
+        getDetails(data[i].id, type, func);
     }
 }
 
@@ -205,13 +234,27 @@ var getNowPlaying = function () {
 
 // Gets the currently popular content for the specific type (movie or tv)
 var getPopular = function (type) {
+    type = forceType(type);
     var apiUrl = 'https://api.themoviedb.org/3/' + type + '/popular?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74&language=en-US';
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
                 // returns an object with a results property
-                console.log(data);
-                createContentArray(data.results, type);
+                createContentCards(data.results, type, 'pop' + typeFormat(type) + 'Card');
+            })
+        }
+    });
+}
+
+// Gets the currently popular content for the specific type (movie or tv)
+var getTopRated = function (type) {
+    type = forceType(type);
+    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/top_rated?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74&language=en-US';
+    fetch(apiUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                // returns an object with a results property
+                createContentCards(data.results, type, 'top' + typeFormat(type) + 'Card');
             })
         }
     });
@@ -227,9 +270,7 @@ var appendToResults = function (data) {
 // Searches for content of the specific type using the passed in query
 var searchContent = function (query, type) {
     // forces type to be one of two valid types for api call
-    if (type !== 'tv') {
-        type = 'movie';
-    }
+    type = forceType(type);
     var apiUrl = 'https://api.themoviedb.org/3/search/' + type + '?api_key=' + tmdbkey + '&query=' + query;
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
@@ -244,9 +285,7 @@ var searchContent = function (query, type) {
 // gets the videos for the speicifc content
 var contentVideo = function (id, type) {
     // forces type to be one of two valid types for api call
-    if (type !== 'tv') {
-        type = 'movie';
-    }
+    type = forceType(type);
     var apiUrl = 'https://api.themoviedb.org/3/' + type + '/' + id + '/videos?api_key=' + tmdbkey;
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
@@ -269,14 +308,27 @@ var releaseDates = function (movieID) {
     })
 }
 
-var displayModal = function(active){
+var displaySearchSection = function(active){
+    var section = $('#search-section');
+    if (active) {
+        if (section.hasClass('is-hidden')) {
+            section.removeClass('is-hidden');
+        }
+    } else {
+        if (!section.hasClass('is-hidden')) {
+            section.addClass('is-hidden');
+        }
+    }
+}
+
+var displayModal = function (active) {
     var modal = $('#movie-modal');
-    if (active){
-        if (!modal.hasClass('is-active')){
+    if (active) {
+        if (!modal.hasClass('is-active')) {
             modal.addClass('is-active');
         }
     } else {
-        if (modal.hasClass('is-active')){
+        if (modal.hasClass('is-active')) {
             modal.removeClass('is-active');
         }
     }
@@ -284,20 +336,16 @@ var displayModal = function(active){
 
 var createModal = function (contentObj) {
     $('.modal-card-title').text(contentObj.title);
-    $('#modal-poster-img').attr('src', tmdbImgPath+contentObj.poster);
+    $('#modal-poster-img').attr('src', tmdbImgPath + contentObj.poster);
     $('#modal-release p').text(contentObj.release);
-    if (contentObj.type === 'movie'){
-        $('#modal-type p').text(contentObj.type[0].toUpperCase() + contentObj.type.substring(1));
-    } else if (contentObj.type === 'tv') {
-        $('#modal-type p').text(contentObj.type.toUpperCase());
-    }
+    $('#modal-type p').text(typeFormat(contentObj.type));
     $('#modal-genre', contentObj.genres.join(', '));
-    $('#modal-popularity p').text(contentObj.popularity*10 + '%');
+    $('#modal-popularity p').text(contentObj.popularity * 10 + '%');
     $('#modal-movie-description p').text(contentObj.overview);
     displayModal(true);
 }
 
-getDetails(73107,'tv','createModal');
+getDetails(73107, 'tv', 'createModal');
 
 // var movieIDs = [385687, 384018, 13804, 51497, 213927, 42246, 82992, 911241, 450487, 15942, 8324, 584, 13342, 113294, 9615, 38493, 49453, 545669];
 // console.log(movieIDs.length);
@@ -305,8 +353,39 @@ getDetails(73107,'tv','createModal');
 //     getDetails(movieIDs[i], 'movie', 'addToWatchlist');
 // }
 
-loadWatchlist();
 
-$('#modal-cancel-btn').on('click',function(){
+$('#modal-cancel-btn').on('click', function () {
     displayModal(false);
 });
+
+var createCard = function (data, container) {
+    var cardContainer = $('<div>').addClass('column is-3-table is-3-desktop');
+    var card = $('<div>').addClass('card');
+    var divEl = $('<div>').addClass('card-image has-text-centered px-6');
+    var imgEl = $('<img>').addClass('mt-1');
+    if (data.poster){
+        imgEl.attr('src', tmdbImgPath + data.poster);
+    } else {
+        imgEl.attr('src','./assets/images/No_Image_Available.jpg');
+    }
+    divEl.append(imgEl);
+    card.append(divEl);
+    divEl = $('<div>').addClass('card-content');
+    var pEl = $('<p>').text(data.title);
+    divEl.append(pEl);
+    pEl = $('<p>').text(data.release.split('/')[2]).addClass('title is-size-5');
+    divEl.append(pEl);
+    card.append(divEl);
+    var aEl = $('<a>').addClass('card-footer');
+    pEl = $('<p>').text('Add to Watchlist').addClass('card-footer-item');
+    aEl.append(pEl);
+    card.append(aEl);
+    cardContainer.append(card);
+    container.append(cardContainer);
+}
+
+loadWatchlist();
+getPopular('movie');
+getPopular('tv');
+getTopRated('movie');
+getTopRated('tv');

@@ -30,6 +30,13 @@ img:hover {
     cursor: pointer;
 }
 
+.card {
+    transition: 250ms all;
+}
+.card:hover {
+    transform: scale(1.2); 
+}
+
 /* Modal Styles */
 #movie-modal section img {
     width: auto;
