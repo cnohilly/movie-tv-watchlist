@@ -130,7 +130,6 @@ var getDetails = function (id, type, func) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
                 // creates an object to store the relevant information in
                 var contentObj = {
                     id: data.id,
@@ -241,7 +240,6 @@ var getPopular = function (type) {
         if (response.ok) {
             response.json().then(function (data) {
                 // returns an object with a results property
-                console.log(data);
                 createContentCards(data.results, type, 'pop' + typeFormat(type) + 'Card');
             })
         }
@@ -256,7 +254,6 @@ var getTopRated = function (type) {
         if (response.ok) {
             response.json().then(function (data) {
                 // returns an object with a results property
-                console.log(data);
                 createContentCards(data.results, type, 'top' + typeFormat(type) + 'Card');
             })
         }
