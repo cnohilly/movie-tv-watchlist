@@ -260,13 +260,6 @@ var getTopRated = function (type) {
     });
 }
 
-// Function to append data
-var appendToResults = function (data) {
-    for (var i = 0; i < data.length; i++) {
-        console.log(data[i]);
-    }
-}
-
 // Searches for content of the specific type using the passed in query
 var searchContent = function (query, type) {
     // forces type to be one of two valid types for api call
@@ -275,8 +268,9 @@ var searchContent = function (query, type) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                appendToResults(data.results);
-                // getDetails(data.results[0].id, type, 'addToWatchlist');
+                searchContainer.empty();
+                displaySearchSection(true);
+                createContentCards(data.results,type,'searchCard');
             })
         }
     })
@@ -345,19 +339,6 @@ var createModal = function (contentObj) {
     displayModal(true);
 }
 
-getDetails(73107, 'tv', 'createModal');
-
-// var movieIDs = [385687, 384018, 13804, 51497, 213927, 42246, 82992, 911241, 450487, 15942, 8324, 584, 13342, 113294, 9615, 38493, 49453, 545669];
-// console.log(movieIDs.length);
-// for (var i = 0; i < movieIDs.length; i++) {
-//     getDetails(movieIDs[i], 'movie', 'addToWatchlist');
-// }
-
-
-$('#modal-cancel-btn').on('click', function () {
-    displayModal(false);
-});
-
 var createCard = function (data, container) {
     var cardContainer = $('<div>').addClass('column is-3-table is-3-desktop');
     var card = $('<div>').addClass('card');
@@ -384,8 +365,25 @@ var createCard = function (data, container) {
     container.append(cardContainer);
 }
 
+$('#modal-cancel-btn').on('click', function () {
+    displayModal(false);
+});
+
+$('#inner-search-form').on('submit',function(event){
+    event.preventDefault();
+    var input = $('#inputValue').val().trim();
+    $('#inputValue').val('');
+    var type = 'movie';
+    console.log(input);
+    if (input){
+        searchContent(input,type);
+    }
+});
+
 loadWatchlist();
 getPopular('movie');
 getPopular('tv');
 getTopRated('movie');
 getTopRated('tv');
+
+//getDetails(73107, 'tv', 'createModal');
