@@ -1,36 +1,40 @@
+/* Background Image styles */
 html {
     background: url("../images/background-image-1.jpg") no-repeat fixed;
     background-size: cover;
     background-position: center top;
 }
 
-
+/* Section styles */
 section h2 {
     border-bottom: 1.5px solid gold;
 }
 
+/* List Container styles */
 .list-container {
     border-radius: 5px;
     min-height: 200px;
-    overflow: auto;
     width: 100%;
     background-color: rgba(122, 122, 122, 0.3);
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: repeat(auto-fill, 13vw);
     justify-content: space-between;
     align-content: start;
     gap: 2rem;
 }
 
+/* Card styles */
 .card-content {
     padding: 1rem;
 }
 
+/* This ensures that posters with different dimensions will all have the same proportions in the cards */
 .card img {
-    height: 20vw;
     width: 100%;
-    overflow: hidden;
+    height: 20vw;
+    object-fit: cover;
 }
+/* Card styles End*/
 
 /* Modal styles */
 #modal-poster-img {
@@ -50,8 +54,8 @@ section h2 {
 /* Modal Styles End */
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
-/* Try not to touch this or else the navbar will break on smaller screens! */
 @media screen and (max-width: 1023px) {
+    /* Try not to touch this or else the navbar will break on smaller screens! */
     .navbar-menu {
         display: flex;
         justify-content: center;
@@ -64,6 +68,11 @@ section h2 {
     .navbar-start a {
         padding: 0.5rem 5rem;
     }
+
+    
+    .card-content, .card-footer-item {
+        padding: 0.5rem;
+    }
 }
 
 /* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
@@ -73,10 +82,11 @@ section h2 {
     }
 
     .list-container {
-        justify-content: space-evenly;
+        grid-template-columns: repeat(auto-fill, 42vw);
+        gap: 1rem;
     }
 
-    .card {
-        max-width: 43vw;
+    .card img {
+        height: 63vw;
     }
 }
