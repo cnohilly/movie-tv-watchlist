@@ -365,7 +365,7 @@ var createCard = function (data, container) {
     container.append(cardContainer);
 }
 
-$('#modal-cancel-btn').on('click', function () {
+$('#modal-cancel-btn, .modal-background').on('click', function () {
     displayModal(false);
 });
 
@@ -386,4 +386,4 @@ getPopular('tv');
 getTopRated('movie');
 getTopRated('tv');
 
-//getDetails(73107, 'tv', 'createModal');
+getDetails(73107, 'tv', 'createModal');
