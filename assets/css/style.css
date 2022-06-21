@@ -3,8 +3,6 @@
     padding: 25px;
 }
 
-<<<<<<< HEAD
-=======
 /* Modal styles */
 #modal-poster-img {
     max-width: 50%;
@@ -21,7 +19,6 @@
     font-weight: bold;
 }
 
->>>>>>> feature/radio-buttons
 #search-input {
     font-size: 1rem;
     height: 2.5em;
@@ -49,7 +46,6 @@ img:hover {
     cursor: pointer;
 }
 
-<<<<<<< HEAD
 .card {
     transition: 250ms all;
 }
@@ -85,12 +81,10 @@ img:hover {
 }
 /* Modal Styles End */
 
-=======
 .radio{
      margin-left: 1rem;
 }
 
->>>>>>> feature/radio-buttons
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
 /* Try not to touch this or else the navbar will break on smaller screens! */
 @media screen and (max-width: 1023px) {
@@ -108,12 +102,9 @@ img:hover {
         flex-wrap: wrap;
         justify-content: center;
     }
-<<<<<<< HEAD
 
     #modal-poster-img {
         min-width: 50%;
     }
 }
-=======
-}
->>>>>>> feature/radio-buttons
+
