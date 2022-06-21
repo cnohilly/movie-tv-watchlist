@@ -132,23 +132,21 @@ var getDetails = function (id, type, func) {
             response.json().then(function (data) {
                 // creates an object to store the relevant information in
                 var contentObj = {
-                    id: data.id,
+                    id: ((data.id) ? data.id : null),
                     type: type,
-                    title: data.title,
-                    popularity: data.vote_average,
-                    overview: data.overview,
-                    poster: data.poster_path,
-                    backdrop: data.backdrop_path
+                    title: ((data.title) ? data.title : data.name),
+                    release: ((data.release) ? data.release : data.first_air_date),
+                    popularity: ((data.vote_average) ? data.vote_average : null),
+                    overview: ((data.overview) ? data.overview : null),
+                    poster: ((data.poster_path) ? data.poster_path : null),
+                    backdrop: ((data.backdrop_path) ? data.backdrop_path : null)
                 }
-                if (type === 'movie') {
-                    contentObj.title = data.title;
-                    contentObj.release = data.release_date;
-                } else if (type === 'tv') {
-                    contentObj.title = data.name;
-                    contentObj.release = data.first_air_date;
+                if (contentObj.release){
+                    var dateString = contentObj.release.split('-');
+                    contentObj.release = dateString[1] + '/' + dateString[2] + '/' + dateString[0];
+                } else {
+                    contentObj.release = '00/00/0000';
                 }
-                var dateString = contentObj.release.split('-');
-                contentObj.release = dateString[1] + '/' + dateString[2] + '/' + dateString[0];
 
                 if (data.genres) {
                     var genres = [];
@@ -235,7 +233,7 @@ var getNowPlaying = function () {
 // Gets the currently popular content for the specific type (movie or tv)
 var getPopular = function (type) {
     type = forceType(type);
-    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/popular?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74&language=en-US';
+    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/popular?api_key='+tmdbkey+'&language=en-US';
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -249,7 +247,7 @@ var getPopular = function (type) {
 // Gets the currently popular content for the specific type (movie or tv)
 var getTopRated = function (type) {
     type = forceType(type);
-    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/top_rated?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74&language=en-US';
+    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/top_rated?api_key='+tmdbkey+'&language=en-US';
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -292,7 +290,7 @@ var contentVideo = function (id, type) {
 
 // Global release dates for the movie id
 var releaseDates = function (movieID) {
-    var apiUrl = 'https://api.themoviedb.org/3/movie/' + movieID + '/release_dates?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74'
+    var apiUrl = 'https://api.themoviedb.org/3/movie/' + movieID + '/release_dates?api_key='+tmdbkey;
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -370,11 +368,19 @@ $('#modal-cancel-btn, .modal-background').on('click', function () {
 });
 
 $('#inner-search-form').on('submit',function(event){
+    // prevents normal submission behavior
     event.preventDefault();
+    // gets the input from the search box and trims the value
     var input = $('#inputValue').val().trim();
+    // sets the box back to blank
     $('#inputValue').val('');
-    var type = 'movie';
-    console.log(input);
+    // gets the active radio button, get the parent label and gets the text, trims it and makes it lowercase
+    var type = $('input[name="answer"]:checked').parent().text().trim().toLowerCase();
+    if (type === 'movies'){
+        type = 'movie';
+    } else {
+        type = 'tv';
+    }
     if (input){
         searchContent(input,type);
     }

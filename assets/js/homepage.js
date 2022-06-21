@@ -62,7 +62,6 @@
 
 // }
 
-<<<<<<< HEAD
 // const renderSearchMovies = function(data) {
 //   // When user search another movie, the previous results will erase and display the new search results (movieSearchableEl.innerHTML= "";)
 //      movieSearchableEl.innerHTML = "";
@@ -71,17 +70,6 @@
 //      movieSearchableEl.appendChild(movieBlock);
 //      console.log("Data", data);
 // }
-=======
-
-const renderSearchMovies = function(data) {
-  // When user search another movie, the previous results will erase and display the new search results (movieSearchableEl.innerHTML= "";)
-     movieSearchableEl.innerHTML = "";
-     const movies = data.results
-     const movieBlock = createMovieContainer(movies);
-     movieSearchableEl.appendChild(movieBlock);
-     console.log("Data", data);
-}
->>>>>>> feature/radio-buttons
 
 
 // searchBtnEl.onclick = function(event) {
