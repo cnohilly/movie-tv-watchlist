@@ -25,7 +25,7 @@ section h2 {
 
 /* Card styles */
 .card-content {
-    padding: 1rem;
+    padding: 0.75rem;
 }
 
 /* This ensures that posters with different dimensions will all have the same proportions in the cards */
@@ -53,7 +53,7 @@ section h2 {
 }
 /* Modal Styles End */
 
-/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
 @media screen and (max-width: 1023px) {
     /* Try not to touch this or else the navbar will break on smaller screens! */
     .navbar-menu {
@@ -69,9 +69,28 @@ section h2 {
         padding: 0.5rem 5rem;
     }
 
-    
+    .list-container {
+        grid-template-columns: repeat(auto-fill, 17vw);
+        gap: 1rem;
+    }
+
+    .card img {
+        height: 24vw;
+    }
+
     .card-content, .card-footer-item {
         padding: 0.5rem;
+    }
+}
+
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
+@media screen and (max-width: 768px) {
+    .list-container {
+        grid-template-columns: repeat(auto-fill, 21vw);
+    }
+
+    .card img {
+        height: 31vw;
     }
 }
 
@@ -83,7 +102,6 @@ section h2 {
 
     .list-container {
         grid-template-columns: repeat(auto-fill, 42vw);
-        gap: 1rem;
     }
 
     .card img {
