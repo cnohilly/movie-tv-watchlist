@@ -32,7 +32,7 @@ img:hover {
 
 /* Modal Styles */
 #movie-modal section img {
-    width: auto;
+    width: 40%;
     transition: none;
 }
 
@@ -43,8 +43,8 @@ img:hover {
 }
 
 #modal-poster-img {
-    max-width: 50%;
-    min-width: 30%;
+    width: 40%;
+    height: 100%;
     border-radius: 10px;
 }
 
@@ -70,7 +70,13 @@ img:hover {
         justify-content: center;
     }
 
-    .navbar-start a {
-        padding: 0.5rem 5rem;
+    .navbar-start {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #modal-poster-img {
+        min-width: 50%;
     }
 }
