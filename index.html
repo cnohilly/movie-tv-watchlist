@@ -64,7 +64,7 @@
             <div class="control column">
                 <p class="mb-2 ml-3">Choose Catergory To Search</p>
                 <label class="radio mt-1 mr-5">
-                    <input type="radio" name="answer">
+                    <input type="radio" name="answer" checked>
                     Movies
                 </label>
                 <label class="radio">
@@ -79,11 +79,30 @@
     </section>
     <!--End of Hero Section-->
 
+    <!-- Card Template -->
+    <div class="is-hidden card-template">
+        <div class="column is-3-table is-3-desktop content-card">
+            <div class="card" data-content-type="0" data-content-id="0">
+                <div class="card-image has-text-centered px-6 card-info">
+                    <img class="poster" src="" alt="" class="mt-1">
+                </div>
+                <div class="card-content card-info">
+                    <p class="content-title"></p>
+                    <p class="content-date"></p>
+                </div>
+                <div class="card-footer">
+                    <p class="card-footer-item">Add to Watchlist</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Card Template End -->
+
     <!--Search Results Cards-->
     <section class="section is-hidden" id="search-section">
         <div class="container">
             <h3 class="title has-text-centered is-size-4 search-results">Search Results</h3>
-            <div class="columns mt-5 is-8 is-variable" id="search-results-container">
+            <div class="columns mt-5 is-8 is-variable card-container" id="search-results-container">
             </div>
         </div>
     </section>
@@ -93,7 +112,7 @@
     <section class="section">
         <div class="container">
             <h3 class="title has-text-centered is-size-4" id="popular-movies">Popular Movies</h3>
-            <div class="columns mt-5 is-8 is-variable" id="pop-movies-container">
+            <div class="columns mt-5 is-8 is-variable card-container" id="pop-movies-container">
             </div>
         </div>
     </section>
@@ -103,7 +122,7 @@
     <section class="section">
         <div class="container">
             <h3 class="title has-text-centered is-size-4" id="popular-tv">Popular TV</h3>
-            <div class="columns mt-5 is-8 is-variable" id="pop-tv-container">
+            <div class="columns mt-5 is-8 is-variable card-container" id="pop-tv-container">
             </div>
         </div>
     </section>
@@ -113,7 +132,7 @@
     <section class="section">
         <div class="container">
             <h3 class="title has-text-centered is-size-4" id="top-movies">Top Rated Movies</h3>
-            <div class="columns mt-5 is-8 is-variable" id="top-movies-container">
+            <div class="columns mt-5 is-8 is-variable card-container" id="top-movies-container">
             </div>
         </div>
     </section>
@@ -123,7 +142,7 @@
     <section class="section">
         <div class="container">
             <h3 class="title has-text-centered is-size-4" id="top-tv">Top Rated TV</h3>
-            <div class="columns mt-5 is-8 is-variable" id="top-tv-container">
+            <div class="columns mt-5 is-8 is-variable card-container" id="top-tv-container">
             </div>
         </div>
     </section>
@@ -133,7 +152,7 @@
     <!-- To display modal, add 'is-active' to modal class -->
     <div id="movie-modal" class="modal">
         <div class="modal-background"></div>
-        <div class="modal-card">
+        <div class="modal-card" data-content-id="" data-content-type="">
             <header class="modal-card-head is-flex is-flex-direction-column is-flex-wrap-wrap has-background-info-dark">
                 <!-- Modal title -->
                 <h2 class="modal-card-title has-text-weight-bold has-text-white">Spider-Man: No Way Home</h2>
@@ -185,10 +204,5 @@
     <script src="assets/js/omdbscript.js"></script>
     <script src="assets/js/homepage.js"></script>
 </body>
-<<<<<<< HEAD </html>
-    =======
 
 </html>
-
-
->>>>>>> feature/radio-buttons

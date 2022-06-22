@@ -41,17 +41,11 @@
 
 section img {
     width: 200px;
-    transition: 250ms all;
-}
-
-img:hover {
-    margin-left: 0 40px;
-    transform: scale(1.2);
-    cursor: pointer;
 }
 
 .card {
     transition: 250ms all;
+    cursor: pointer;
 }
 .card:hover {
     transform: scale(1.2); 
