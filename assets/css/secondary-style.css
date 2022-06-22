@@ -82,12 +82,12 @@ section h2 {
     }
 
     .list-container {
-        grid-template-columns: repeat(auto-fill, 17vw);
+        grid-template-columns: repeat(auto-fill, 20vw);
         gap: 1rem;
     }
 
     .card img {
-        height: 24vw;
+        height: 30vw;
     }
 
     .card-content, .card-footer-item {
@@ -102,11 +102,11 @@ section h2 {
 /* MEDIA QUERY FOR TABLETS AND SMALLER */
 @media screen and (max-width: 768px) {
     .list-container {
-        grid-template-columns: repeat(auto-fill, 21vw);
+        grid-template-columns: repeat(auto-fill, 25vw);
     }
 
     .card img {
-        height: 31vw;
+        height: 37vw;
     }
 }
 
@@ -117,10 +117,10 @@ section h2 {
     }
 
     .list-container {
-        grid-template-columns: repeat(auto-fill, 42vw);
+        grid-template-columns: repeat(auto-fill, 35vw);
     }
 
     .card img {
-        height: 63vw;
+        height: 53vw;
     }
 }
