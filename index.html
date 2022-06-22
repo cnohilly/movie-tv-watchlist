@@ -17,7 +17,7 @@
 
     <!--Navigation Bar-->
 
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand has-background-black">
 			<h1 class="navbar-item has-background-black has-text-light" id="nav-logo">
 				Team One
@@ -27,20 +27,24 @@
         <div id="navbarBasicExample" class="navbar-menu">
         	<div class="navbar-start">
 
-				<a class="navbar-item has-text-centered" id="nav-pop-mov" href="./watchlist.html">
+				<a class="navbar-item has-text-centered has-background-light" id="nav-pop-mov" href="./watchlist.html">
 					Watchlist
 				</a>
 
-				<a class="navbar-item has-text-centered" id="nav-pop-mov" href="#popular-movies">
+				<a class="navbar-item has-text-centered has-background-light" id="nav-pop-mov" href="#popular-movies">
 					Popular Movies
 				</a>
 
-				<a class="navbar-item has-text-centered" id="nav-pop-tv" href="#popular-tv">
+				<a class="navbar-item has-text-centered has-background-light" id="nav-pop-tv" href="#popular-tv">
 					Popular TV Shows
 				</a>
 		
-				<a class="navbar-item has-text-centered" id="nav-watchlist" href="#top-rated">
-					Top Rated
+				<a class="navbar-item has-text-centered has-background-light" id="nav-watchlist" href="#top-movies">
+					Top Rated Movies
+				</a>
+
+                <a class="navbar-item has-text-centered has-background-light" id="nav-watchlist" href="#top-tv">
+					Top Rated TV Shows
 				</a>
 
 			</div>
@@ -53,7 +57,7 @@
 			<p class="title has-text-black">
 				Welcome.
 			</p>
-			<p class="subtitle">
+			<p class="subtitle has-text-light">
 				"Tons of movies and Tv shows to build your <strong class="has-text-black">WatchList!</strong> Enjoy!"
 			</p>
         </div>
@@ -68,7 +72,7 @@
             </div>
         	</label>
 			<div class="control column">
-                <p class="mb-2 ml-3">Choose Catergory To Search</p>
+                <p class="mb-2 ml-3 has-text-black">Choose Catergory To Search</p>
                 <label class="radio mt-1 mr-5">
                   <input type="radio" name="answer" checked>
                   Movies
@@ -144,7 +148,7 @@
     <!--Start of Top Rated TV -->
     <section class="section">
         <div class="container">
-            <h3 class="title has-text-centered is-size-4" id="top-tv">Top Rated TV</h3>
+            <h3 class="title has-text-centered is-size-4" id="top-tv">Top Rated TV Shows</h3>
             <div class="columns mt-5 is-8 is-variable card-container" id="top-tv-container">
             </div>
         </div>
