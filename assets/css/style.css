@@ -2,12 +2,6 @@
    font-size: 20px;
 }
 
-
-.poster-image {
-    width: 200px;
-    padding: 25px;
-}
-
 #search-input {
     font-size: 1rem;
     height: 2.5em;
@@ -68,10 +62,6 @@ section img {
 }
 /* Modal Styles End */
 
-.radio{
-     margin-left: 1rem;
-}
-
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
 /* Try not to touch this or else the navbar will break on smaller screens! */
 @media screen and (max-width: 1023px) {
@@ -92,13 +82,5 @@ section img {
 
     #modal-poster-img {
         min-width: 50%;
-    }
-}
-
-@media screen and (max-width: 1023px) and (min-width: 769px) {
-    .card img {
-        max-width: none;
-        width: auto;
-        height: 25vw;
     }
 }
