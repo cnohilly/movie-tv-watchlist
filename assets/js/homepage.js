@@ -70,6 +70,7 @@
 //      movieSearchableEl.appendChild(movieBlock);
 //      console.log("Data", data);
 // }
+<<<<<<< HEAD
 
 const renderSearchMovies = function(data) {
   // When user search another movie, the previous results will erase and display the new search results (movieSearchableEl.innerHTML= "";)
@@ -79,6 +80,8 @@ const renderSearchMovies = function(data) {
      movieSearchableEl.appendChild(movieBlock);
      console.log("Data", data);
 }
+=======
+>>>>>>> feature/function-refactor
 
 
 // searchBtnEl.onclick = function(event) {

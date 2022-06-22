@@ -14,6 +14,10 @@
     border-radius: 5px;
 }
 
+.radio{
+     margin-left: 1rem;
+}
+
 #movie-searchable {
     margin-top: 35px;
 }
@@ -26,17 +30,11 @@
 
 section img {
     width: 200px;
-    transition: 250ms all;
-}
-
-img:hover {
-    margin-left: 0 40px;
-    transform: scale(1.2);
-    cursor: pointer;
 }
 
 .card {
     transition: 250ms all;
+    cursor: pointer;
 }
 .card:hover {
     transform: scale(1.2); 

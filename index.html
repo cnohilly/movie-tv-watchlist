@@ -18,7 +18,6 @@
     <!--Navigation Bar-->
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
-        
         <div class="navbar-brand has-background-black">
 			<h1 class="navbar-item has-background-black has-text-light" id="nav-logo">
 				Team One
@@ -59,9 +58,6 @@
 			</p>
         </div>
         <form class="columns is-desktop" id="inner-search-form" action="/search" method="get" accept-charset="utf-8">
-            
-            
-
         	<label class="column">
             <div class="control column is-full form-group">
             	<input class="input is-rounded" type="text" placeholder="Search for a movie or tv show" id="inputValue">
@@ -71,7 +67,6 @@
                 <button class="button is-black mb-1" type="submit" id="search">Search</button>
             </div>
         	</label>
-            
 			<div class="control column">
                 <p class="mb-2 ml-3">Choose Catergory To Search</p>
                 <label class="radio mt-1 mr-5">
@@ -83,43 +78,91 @@
                   TV Shows
                 </label>
             </div>
-            
         </form>
     </section>
-
     <!--End of Hero Section-->
 
-    <!--Search Results Title-->       
-	<section class="section">
-		<div class="container">
-			<h3 class="title has-text-centered is-size-4">Search Results</h3>
-		</div>
-	</section> 
-
-	<!--Search Results Displayed-->
-	
-	<div class="container movie-poster" id="movie-searchable">
-		<!--Movies Will Be Displayed Here Via the DOM-->
-		
-	</div>
-
-          
-            
-            
-        
+    <!-- Card Template -->
+    <div class="is-hidden card-template">
+        <div class="column is-3-table is-3-desktop content-card">
+            <div class="card" data-content-type="0" data-content-id="0">
+                <div class="card-image has-text-centered px-6 card-info">
+                    <img class="poster" src="" alt="" class="mt-1">
+                </div>
+                <div class="card-content card-info">
+                    <p class="content-title"></p>
+                    <p class="content-date"></p>
+                </div>
+                <div class="card-footer">
+                    <p class="card-footer-item">Add to Watchlist</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Card Template End -->
+    
+    <!--Search Results Cards-->
+    <section class="section is-hidden" id="search-section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4 search-results">Search Results</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="search-results-container">
+            </div>
+        </div>
+    </section>
     <!--End of Search Results Cards-->
+    
+    <!--Popular Movies-->
+    <section class="section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4" id="popular-movies">Popular Movies</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="pop-movies-container">
+            </div>
+        </div>
+    </section>
+    <!--End of Popular Movies-->
+    
+    <!--Popular Tv Shows-->
+    <section class="section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4" id="popular-tv">Popular TV</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="pop-tv-container">
+            </div>
+        </div>
+    </section>
+    <!--End of Popular Tv Shows-->
+    
+    <!--Start of Top Rated Movies -->
+    <section class="section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4" id="top-movies">Top Rated Movies</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="top-movies-container">
+            </div>
+        </div>
+    </section>
+    <!--End of Top Rated Movies -->
+    
+    <!--Start of Top Rated TV -->
+    <section class="section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4" id="top-tv">Top Rated TV</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="top-tv-container">
+            </div>
+        </div>
+    </section>
+    <!--End of Top Rated TV-->
 
     <!-- Footer Section -->
     <footer class="has-background-black has-text-white has-text-centered p-5 mt-6 is-size-4">
         <h2>Made by Kyle Tang, Stephon Treadwell, Chris Nohilly, and Daniel Wormald</h2>
         <p class="pt-3">&copy; 2022 Team One, Inc.</p>
     </footer>
-    
+    <!-- End of Footer -->
+
     <!-- Modal -->
     <!-- To display modal, add 'is-active' to modal class -->
     <div id="movie-modal" class="modal">
         <div class="modal-background"></div>
-        <div class="modal-card">
+        <div class="modal-card" data-content-id="" data-content-type="">
             <header class="modal-card-head is-flex is-flex-direction-column is-flex-wrap-wrap has-background-info-dark">
                 <!-- Modal title -->
                 <h2 class="modal-card-title has-text-weight-bold has-text-white">Spider-Man: No Way Home</h2>

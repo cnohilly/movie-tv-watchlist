@@ -3,7 +3,6 @@ var localstorageKey = 'movies-tv-watchlist';
 var tmdbImgPath = 'https://image.tmdb.org/t/p/w500';
 var bodyEl = $('body');
 var watchlist = [];
-var contentArray = [];
 var searchContainer = $('#search-results-container');
 var popMovieContainer = $('#pop-movies-container');
 var popTVContainer = $('#pop-tv-container');
@@ -13,8 +12,8 @@ var topTVContainer = $('#top-tv-container');
 // function to return a sorted array of the watchlist depending on passed in parameters
 var getSortedWatchlist = function (sortType, reverse) {
     var sortedWatchlist = watchlist;
-    if (watchlist.length <= 0) { return false; }
-
+    // exits function if watchlist is not large enough to sort
+    if (watchlist.length <= 1) { return false; }
     // Determines in which way to sort the list
     switch (sortType) {
         case 'title':
@@ -54,11 +53,9 @@ var getFilteredWatchlist = function (filterType, filterValue) {
 
     switch (filterType) {
         case 'genre':
-            for (var i = 0; i < watchlist.length; i++) {
-                if (watchlist[i].genres && watchlist[i].genres.indexOf(filterValue) >= 0) {
-                    filteredWatchlist.push(watchlist[i]);
-                }
-            }
+            filteredWatchlist = watchlist.filter(function(content){
+                return content.genres.includes(filterValue);
+            })
             break;
     }
     return filteredWatchlist;
@@ -80,43 +77,24 @@ var getWatchlistGenres = function () {
     return genres;
 }
 
-// converts the watchlist to a separate array storing only the id and content type
-var createSaveArray = function () {
-    // if the watchlist is empty, return false
-    if (watchlist.length <= 0) { return false; }
-    var saveArray = [], contentObj;
-    // loops through the watchlist and only stores the id and content type
-    for (var i = 0; i < watchlist.length; i++) {
-        contentObj = {
-            id: watchlist[i].id,
-            type: watchlist[i].type
-        };
-        saveArray.push(contentObj);
-    }
-    return saveArray;
-}
-
 // converts and saves the watchlist to localstorage with just the id and content type
 var saveWatchlist = function () {
     // will not save anything if the watchlist is empty
     if (watchlist.length > 0) {
-        localStorage.setItem(localstorageKey, JSON.stringify(createSaveArray()));
+        localStorage.setItem(localstorageKey, JSON.stringify(watchlist));
     }
 }
 
 // attempts to load the watchlist from localstorage and translate it to full information
 var loadWatchlist = function () {
     // loads the saved array from localstorage
-    var loadedList = localStorage.getItem(localstorageKey);
+    watchlist = localStorage.getItem(localstorageKey);
     // if the list is empty or doesn't exist, sets watchlist to an empty array
-    if (!loadedList) {
+    if (!watchlist) {
         watchlist = [];
         // otherwise the list is parsed and looped through to get more details about each piece of content
     } else {
-        loadedList = JSON.parse(loadedList);
-        for (var i = 0; i < loadedList.length; i++) {
-            getDetails(loadedList[i].id, loadedList[i].type, 'addToWatchlist');
-        }
+        watchlist = JSON.parse(watchlist);
     }
 }
 
@@ -132,24 +110,21 @@ var getDetails = function (id, type, func) {
             response.json().then(function (data) {
                 // creates an object to store the relevant information in
                 var contentObj = {
-                    id: data.id,
+                    id: ((data.id) ? data.id : null),
                     type: type,
-                    title: data.title,
-                    popularity: data.vote_average,
-                    overview: data.overview,
-                    poster: data.poster_path,
-                    backdrop: data.backdrop_path
+                    title: ((data.title) ? data.title : data.name),
+                    release: ((data.release_date) ? data.release_date : data.first_air_date),
+                    popularity: ((data.vote_average) ? data.vote_average : 0),
+                    overview: ((data.overview) ? data.overview : 'There is no description for this title.'),
+                    poster: ((data.poster_path) ? (tmdbImgPath + data.poster_path) : './assets/images/No_Image_Available.jpg'),
+                    backdrop: ((data.backdrop_path) ? tmdbImgPath + data.backdrop_path : './assets/images/No_Image_Available.jpg')
                 }
-                if (type === 'movie') {
-                    contentObj.title = data.title;
-                    contentObj.release = data.release_date;
-                } else if (type === 'tv') {
-                    contentObj.title = data.name;
-                    contentObj.release = data.first_air_date;
+                if (contentObj.release){
+                    var dateString = contentObj.release.split('-');
+                    contentObj.release = dateString[1] + '/' + dateString[2] + '/' + dateString[0];
+                } else {
+                    contentObj.release = '00/00/0000';
                 }
-                var dateString = contentObj.release.split('-');
-                contentObj.release = dateString[1] + '/' + dateString[2] + '/' + dateString[0];
-
                 if (data.genres) {
                     var genres = [];
                     for (var i = 0; i < data.genres.length; i++) {
@@ -163,13 +138,6 @@ var getDetails = function (id, type, func) {
                 switch (func) {
                     case 'addToWatchlist':
                         watchlist.push(contentObj);
-                        break;
-                    case 'appendImage':
-                        var imgEl = $('<img>').attr('src', tmdbImgPath + data.poster_path);
-                        bodyEl.append(imgEl);
-                        break;
-                    case 'createContentArray':
-                        contentArray.push(contentObj);
                         break;
                     case 'createModal':
                         createModal(contentObj);
@@ -235,7 +203,7 @@ var getNowPlaying = function () {
 // Gets the currently popular content for the specific type (movie or tv)
 var getPopular = function (type) {
     type = forceType(type);
-    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/popular?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74&language=en-US';
+    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/popular?api_key='+tmdbkey+'&language=en-US';
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -249,7 +217,7 @@ var getPopular = function (type) {
 // Gets the currently popular content for the specific type (movie or tv)
 var getTopRated = function (type) {
     type = forceType(type);
-    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/top_rated?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74&language=en-US';
+    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/top_rated?api_key='+tmdbkey+'&language=en-US';
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -276,7 +244,7 @@ var searchContent = function (query, type) {
     })
 }
 
-// gets the videos for the speicifc content
+// gets the videos for the specific content
 var contentVideo = function (id, type) {
     // forces type to be one of two valid types for api call
     type = forceType(type);
@@ -290,18 +258,7 @@ var contentVideo = function (id, type) {
     })
 }
 
-// Global release dates for the movie id
-var releaseDates = function (movieID) {
-    var apiUrl = 'https://api.themoviedb.org/3/movie/' + movieID + '/release_dates?api_key=a7086a2a20bcc73d2ef1bcdf2f87ea74'
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
-            })
-        }
-    })
-}
-
+// used to toggle whether the search result section is hidden
 var displaySearchSection = function(active){
     var section = $('#search-section');
     if (active) {
@@ -315,6 +272,7 @@ var displaySearchSection = function(active){
     }
 }
 
+// used to toggle whether the modal for content details is displayed
 var displayModal = function (active) {
     var modal = $('#movie-modal');
     if (active) {
@@ -328,62 +286,102 @@ var displayModal = function (active) {
     }
 }
 
+// updates the information for the content modal and displays it
 var createModal = function (contentObj) {
+    $('.modal-card').attr('data-content-id',contentObj.id).attr('data-content-type',contentObj.type);
     $('.modal-card-title').text(contentObj.title);
-    $('#modal-poster-img').attr('src', tmdbImgPath + contentObj.poster);
+    $('#modal-poster-img').attr('src', contentObj.poster);
     $('#modal-release p').text(contentObj.release);
     $('#modal-type p').text(typeFormat(contentObj.type));
-    $('#modal-genre', contentObj.genres.join(', '));
+    $('#modal-genre p').text(contentObj.genres.join(', '));
     $('#modal-popularity p').text(contentObj.popularity * 10 + '%');
     $('#modal-movie-description p').text(contentObj.overview);
+    modalAddButtonText();
     displayModal(true);
 }
 
+// creates the cards for the content and appends them to the specified container
 var createCard = function (data, container) {
-    var cardContainer = $('<div>').addClass('column is-3-table is-3-desktop');
-    var card = $('<div>').addClass('card');
-    var divEl = $('<div>').addClass('card-image has-text-centered px-6');
-    var imgEl = $('<img>').addClass('mt-1');
-    if (data.poster){
-        imgEl.attr('src', tmdbImgPath + data.poster);
-    } else {
-        imgEl.attr('src','./assets/images/No_Image_Available.jpg');
-    }
-    divEl.append(imgEl);
-    card.append(divEl);
-    divEl = $('<div>').addClass('card-content');
-    var pEl = $('<p>').text(data.title);
-    divEl.append(pEl);
-    pEl = $('<p>').text(data.release.split('/')[2]).addClass('title is-size-5');
-    divEl.append(pEl);
-    card.append(divEl);
-    var aEl = $('<a>').addClass('card-footer');
-    pEl = $('<p>').text('Add to Watchlist').addClass('card-footer-item');
-    aEl.append(pEl);
-    card.append(aEl);
-    cardContainer.append(card);
-    container.append(cardContainer);
+    var card = $('.card-template .content-card').clone();
+    card.find('.card').attr('data-content-type',data.type).attr('data-content-id',data.id);
+    card.find('.poster').attr('src',data.poster);
+    card.find('.content-title').text(data.title);
+    card.find('.content-date').text(data.release.split('/')[2]);
+    container.append(card);
 }
 
-$('#modal-cancel-btn').on('click', function () {
-    displayModal(false);
-});
+var modalAddButtonText = function (){
+    var id = $('.modal-card').attr('data-content-id');
+    var addBtn = $('#modal-add-btn');
+    console.log("Checking", id, addBtn);
+    if (!watchlist.map(function(cont){ return cont.id;}).includes(id)){
+        addBtn.text('Add to Watchlist');
+    } else {
+        addBtn.text('In Watchlist');
+    }
+}
 
+// handles the search form
 $('#inner-search-form').on('submit',function(event){
+    // prevents normal submission behavior
     event.preventDefault();
+    // gets the input from the search box and trims the value
     var input = $('#inputValue').val().trim();
+    // sets the box back to blank
     $('#inputValue').val('');
-    var type = 'movie';
-    console.log(input);
+    // gets the active radio button, get the parent label and gets the text, trims it and makes it lowercase
+    var type = $('input[name="answer"]:checked').parent().text().trim().toLowerCase();
+    if (type === 'movies'){
+        type = 'movie';
+    } else {
+        type = 'tv';
+    }
     if (input){
         searchContent(input,type);
     }
 });
 
+// displays the modal whenever a user clicks on a card
+$('.card-container').on('click','.card-info',function(event){
+    var id = $(this).parent().attr('data-content-id');
+    var type = $(this).parent().attr('data-content-type');
+    getDetails(id,type,'createModal');
+});
+
+// saves the content id to the watchlist if it does not already exist
+$('.card-container').on('click','div.card-footer',function(){
+    var contentObj = {
+        id: $(this).parent().attr('data-content-id'),
+        type: $(this).parent().attr('data-content-type')
+    }
+    if (!watchlist.map(function(cont){ return cont.id;}).includes(contentObj.id)){
+        watchlist.push(contentObj);
+        saveWatchlist();
+        modalAddButtonText();
+    } 
+});
+
+// handles when to hide the modal
+$('#modal-cancel-btn, .modal-background').on('click', function () {
+    displayModal(false);
+});
+
+// will add the piece of content to the watchlist
+$('#modal-add-btn').on('click',function(){
+    var contentObj = {
+        id:  $(this).closest('.modal-card').attr('data-content-id'),
+        type:  $(this).closest('.modal-card').attr('data-content-type')
+    }
+    if (!watchlist.map(function(cont){ return cont.id;}).includes(contentObj.id)){
+        watchlist.push(contentObj);
+        saveWatchlist();
+        modalAddButtonText();
+    } 
+})
+
+// loads the watchlist from local storage and populates all the sections with content
 loadWatchlist();
 getPopular('movie');
 getPopular('tv');
 getTopRated('movie');
 getTopRated('tv');
-
-//getDetails(73107, 'tv', 'createModal');
