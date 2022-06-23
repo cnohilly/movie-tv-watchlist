@@ -20,6 +20,9 @@ On the watch list page, the user will be able to see everything they added to to
 
 <img width="1440" alt="Screen Shot 2022-06-22 at 8 48 04 PM" src="https://user-images.githubusercontent.com/104699408/175184440-6929a0cb-57ae-431b-b0fa-2a5e93200fc0.png">
 
+<img width="1227" alt="Screen Shot 2022-06-22 at 8 52 58 PM" src="https://user-images.githubusercontent.com/104699408/175184722-405a6696-c199-4a47-a5cf-a9e5448e8903.png">
+
+
 
 
 
