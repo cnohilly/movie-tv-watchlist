@@ -6,6 +6,8 @@
 /* Background Image styles */
 html {
     background-color: #485fc7;
+    background: url(../images/background-image.png) no-repeat fixed;
+    background-position: center top;
 }
 
 /* Section styles */
@@ -25,6 +27,10 @@ section h2 {
     align-content: start;
     gap: 2rem;
     padding: 2rem;
+}
+
+#plan-to-watch-list {
+    min-height: 100vh;
 }
 
 /* Card styles */
@@ -47,6 +53,21 @@ section h2 {
 /* Card styles End*/
 
 /* Modal styles */
+.modal-card-head,
+.modal-card-foot {
+    background: url(../images/background-image.png) no-repeat;
+    background-position: center top;
+}
+
+.modal-card-title,
+#modal-release,
+#modal-type,
+#modal-genre,
+#modal-popularity,
+#modal-movie-description h3 {
+    letter-spacing: 2px
+}
+
 #modal-poster-img {
     width: 40%;
     height: 100%;
