@@ -16,6 +16,10 @@ On the watch list page, the user will be able to see everything they added to to
 - Server-side API
 - Google Fonts
 
+## Screenshot
+
+<img width="1440" alt="Screen Shot 2022-06-22 at 8 48 04 PM" src="https://user-images.githubusercontent.com/104699408/175184440-6929a0cb-57ae-431b-b0fa-2a5e93200fc0.png">
+
 
 
 
