@@ -23,7 +23,7 @@
 }
 
 section img {
-    width: 200px;
+    width: 100%;
 }
 
 .card {
@@ -82,5 +82,24 @@ section img {
 
     #modal-poster-img {
         min-width: 50%;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .card img {
+        max-width: none;
+        width: auto;
+        height: 40vw;
+        object-fit: cover;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .columns:not(.is-desktop) {
+        display: flex;
+    }
+
+    .card img {
+        height: 60vw;
     }
 }
