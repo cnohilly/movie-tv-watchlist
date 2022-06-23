@@ -14,58 +14,6 @@ var loadWatchlist = function () {
     }
 }
 
-// function to return a sorted array of the watchlist depending on passed in parameters
-var getSortedWatchlist = function (sortType, reverse) {
-    var sortedWatchlist = watchlist;
-    // exits function if watchlist is not large enough to sort
-    if (watchlist.length <= 1) { return false; }
-    // Determines in which way to sort the list
-    switch (sortType) {
-        case 'title':
-            sortedWatchlist.sort(function (a, b) {
-                var aText = a.title.toUpperCase();
-                var bText = b.title.toUpperCase();
-                if (aText < bText) { return -1; }
-                else if (aText > bText) { return 1; }
-                else { return 0; }
-            });
-            break;
-        case 'release':
-            sortedWatchlist.sort(function (a, b) {
-                var aDate = new Date(a.release);
-                var bDate = new Date(b.release);
-                return aDate.getTime() - bDate.getTime();
-            });
-            break;
-        case 'popularity':
-            sortedWatchlist.sort(function (a, b) {
-                return a.popularity - b.popularity;
-            });
-            break;
-        default: return sortedWatchlist;
-    }
-    // Determines if the list should be sorted in ascending or descending manner
-    if (reverse) {
-        sortedWatchlist.reverse();
-    }
-    return sortedWatchlist;
-}
-
-// Returns an array of the filtered watchlist based on the provided filter type and value to filter for
-var getFilteredWatchlist = function (filterType, filterValue) {
-    var filteredWatchlist = [];
-    if (watchlist.length <= 0) { return false; }
-
-    switch (filterType) {
-        case 'genre':
-            filteredWatchlist = watchlist.filter(function(content){
-                return content.genres.includes(filterValue);
-            })
-            break;
-    }
-    return filteredWatchlist;
-}
-
 // Function to get all of the genres that exist in the current watchlist
 var getWatchlistGenres = function () {
     if (watchlist.length <= 0) { return false; }
@@ -82,40 +30,26 @@ var getWatchlistGenres = function () {
     return genres;
 }
 
-// function to get the details for a movie and determine how to utilize that information
-var getDetails = function (id, type, func) {
-    // forces type to be one of two valid types for api call
-    if (type !== 'tv') {
-        type = 'movie';
+// switch to determine which function or parameters to use
+var functionSwitch = function(contentObj,func){
+    switch (func) {
+        case 'watchlistCard':
+            createCard(contentObj,planToWatchContainer);
+            break;
     }
-    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/' + id + '?api_key=' + tmdbkey + '&language=en-US'
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                // creates an object to store the relevant information in
-                var contentObj = createContentObj(data,type);
-
-                switch (func) {
-                    case 'watchlistCard':
-                        createCard(contentObj,planToWatchContainer);
-                        break;
-                    case 'createModal':
-                        createModal(contentObj);
-                        break;
-                    default:
-                        console.log(data);
-                        break;
-                }
-            })
-        }
-    })
 }
 
+// loops through the watchlist to create cards for each piece of content
 var createWatchlistCards = function(){
     planToWatchContainer.empty();
     watchlist.forEach(function(content){
         getDetails(content.id,content.type,'watchlistCard');
     });
+}
+
+// removes a card from the screen for the specific id
+var updateCardById = function (id) {
+    $('.card[data-content-id='+id+']').closest('.content-card').remove();
 }
 
 loadWatchlist();

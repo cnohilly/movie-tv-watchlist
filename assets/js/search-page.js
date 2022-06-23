@@ -17,67 +17,31 @@ var loadWatchlist = function () {
     }
 }
 
-// function to get the details for a movie and determine how to utilize that information
-var getDetails = function (id, type, func) {
-    // forces type to be one of two valid types for api call
-    if (type !== 'tv') {
-        type = 'movie';
+// switch to determine which function or parameters to use
+var functionSwitch = function (contentObj, func) {
+    switch (func) {
+        case 'searchCard':
+            createCard(contentObj, searchContainer);
+            break;
+        case 'popMovieCard':
+            createCard(contentObj, popMovieContainer);
+            break;
+        case 'popTVCard':
+            createCard(contentObj, popTVContainer);
+            break;
+        case 'topMovieCard':
+            createCard(contentObj, topMovieContainer);
+            break;
+        case 'topTVCard':
+            createCard(contentObj, topTVContainer);
+            break;
     }
-    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/' + id + '?api_key=' + tmdbkey + '&language=en-US'
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                // creates an object to store the relevant information in
-                var contentObj = createContentObj(data,type);
-
-                switch (func) {
-                    case 'addToWatchlist':
-                        watchlist.push(contentObj);
-                        break;
-                    case 'createModal':
-                        createModal(contentObj);
-                        break;
-                    case 'searchCard':
-                        createCard(contentObj, searchContainer);
-                        break;
-                    case 'popMovieCard':
-                        createCard(contentObj, popMovieContainer);
-                        break;
-                    case 'popTVCard':
-                        createCard(contentObj, popTVContainer);
-                        break;
-                    case 'topMovieCard':
-                        createCard(contentObj, topMovieContainer);
-                        break;
-                    case 'topTVCard':
-                        createCard(contentObj, topTVContainer);
-                        break;
-                    default:
-                        console.log(data);
-                        break;
-                }
-            })
-        }
-    })
-}
-
-// Gets the currently playing movies
-var getNowPlaying = function () {
-    var apiUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key=' + tmdbkey + '&language=en-US'
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                // returns an object with a results property
-                appendToResults(data.results);
-            })
-        }
-    })
 }
 
 // Gets the currently popular content for the specific type (movie or tv)
 var getPopular = function (type) {
     type = forceType(type);
-    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/popular?api_key='+tmdbkey+'&language=en-US';
+    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/popular?api_key=' + tmdbkey + '&language=en-US';
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -91,7 +55,7 @@ var getPopular = function (type) {
 // Gets the currently popular content for the specific type (movie or tv)
 var getTopRated = function (type) {
     type = forceType(type);
-    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/top_rated?api_key='+tmdbkey+'&language=en-US';
+    var apiUrl = 'https://api.themoviedb.org/3/' + type + '/top_rated?api_key=' + tmdbkey + '&language=en-US';
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
@@ -112,39 +76,29 @@ var searchContent = function (query, type) {
             response.json().then(function (data) {
                 searchContainer.empty();
                 displaySearchSection(true);
-                createContentCards(data.results,type,'searchCard');
+                createContentCards(data.results, type, 'searchCard');
             })
         }
     })
 }
 
 // used to toggle whether the search result section is hidden
-var displaySearchSection = function(active){
+var displaySearchSection = function (active) {
     var section = $('#search-section');
     if (active) {
-        if (section.hasClass('is-hidden')) {
             section.removeClass('is-hidden');
-        }
     } else {
-        if (!section.hasClass('is-hidden')) {
             section.addClass('is-hidden');
-        }
     }
 }
 
-// Edits the text on the button for the modal
-var modalAddButtonText = function (){
-    var id = $('.modal-card').attr('data-content-id');
-    var addBtn = $('#modal-add-btn');
-    if (!watchlist.map(function(cont){ return cont.id;}).includes(id)){
-        addBtn.text('Add to Watchlist');
-    } else {
-        addBtn.text('In Watchlist');
-    }
+// updates the text for the footer item for the card with the specific id
+var updateCardById = function (id) {
+    $('.card[data-content-id='+id+']').find('.card-footer-item').text(contentButtonText(id));
 }
 
 // handles the search form
-$('#inner-search-form').on('submit',function(event){
+$('#inner-search-form').on('submit', function (event) {
     // prevents normal submission behavior
     event.preventDefault();
     // gets the input from the search box and trims the value
@@ -154,41 +108,15 @@ $('#inner-search-form').on('submit',function(event){
     // gets the active radio button, get the parent label and gets the text, trims it and makes it lowercase
     var type = $('input[name="answer"]:checked').closest('label').text().trim().toLowerCase();
     // forces type to a useable value
-    if (type === 'movies'){
+    if (type === 'movies') {
         type = 'movie';
     } else {
         type = 'tv';
     }
-    if (input){
-        searchContent(input,type);
+    if (input) {
+        searchContent(input, type);
     }
 });
-
-// saves the content id to the watchlist if it does not already exist
-$('.card-container').on('click','div.card-footer',function(){
-    var contentObj = {
-        id: $(this).parent().attr('data-content-id'),
-        type: $(this).parent().attr('data-content-type')
-    }
-    if (!watchlist.map(function(cont){ return cont.id;}).includes(contentObj.id)){
-        watchlist.push(contentObj);
-        saveWatchlist();
-        modalAddButtonText();
-    } 
-});
-
-// will add the piece of content to the watchlist
-$('#modal-add-btn').on('click',function(){
-    var contentObj = {
-        id:  $(this).closest('.modal-card').attr('data-content-id'),
-        type:  $(this).closest('.modal-card').attr('data-content-type')
-    }
-    if (!watchlist.map(function(cont){ return cont.id;}).includes(contentObj.id)){
-        watchlist.push(contentObj);
-        saveWatchlist();
-        modalAddButtonText();
-    } 
-})
 
 // loads the watchlist from local storage and populates all the sections with content
 loadWatchlist();
