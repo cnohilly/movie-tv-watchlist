@@ -31,8 +31,8 @@ On the watch list page, the user will be able to see everything they added to to
 <img width="1440" alt="Screen Shot 2022-06-22 at 8 56 26 PM" src="https://user-images.githubusercontent.com/104699408/175184942-8001a4bf-0dd9-45f6-8c65-c1ecfe8485f4.png">
 
 
-## Links
+## Link
 
-<a href="cnohilly.github.io/movie-tv-watchlist/"> Create Your Watch List Here</a>
+cnohilly.github.io/movie-tv-watchlist/
 
 
