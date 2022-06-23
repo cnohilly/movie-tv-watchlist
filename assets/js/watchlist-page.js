@@ -49,7 +49,10 @@ var createWatchlistCards = function(){
 
 // removes a card from the screen for the specific id
 var updateCardById = function (id) {
-    $('.card[data-content-id='+id+']').closest('.content-card').remove();
+    // plays small slide animation to hide the element then removes the element once the animation is complete
+    $('.card[data-content-id='+id+']').closest('.content-card').slideUp(250,function(){
+        $(this).remove();
+    });
 }
 
 loadWatchlist();
