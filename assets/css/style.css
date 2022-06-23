@@ -2,6 +2,21 @@
    font-size: 20px;
 }
 
+.hero {
+    background: url(../images/background-image.png) no-repeat fixed;
+    background-position: center top;
+}
+
+.hero-body h2,
+.modal-card-title,
+#modal-release,
+#modal-type,
+#modal-genre,
+#modal-popularity,
+#modal-movie-description h3 {
+    letter-spacing: 2px
+}
+
 #search-input {
     font-size: 1rem;
     height: 2.5em;
@@ -23,7 +38,7 @@
 }
 
 section img {
-    width: 200px;
+    width: 100%;
 }
 
 .card {
@@ -35,6 +50,12 @@ section img {
 }
 
 /* Modal Styles */
+.modal-card-head,
+.modal-card-foot {
+    background: url(../images/background-image.png) no-repeat;
+    background-position: center top;
+}
+
 #movie-modal section img {
     width: 40%;
     transition: none;
@@ -82,5 +103,27 @@ section img {
 
     #modal-poster-img {
         min-width: 50%;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .card img {
+        max-width: none;
+        width: auto;
+        height: 40vw;
+        object-fit: cover;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .hero-body {
+    padding: 13rem 4.5rem 2rem 4.5rem;
+    }
+    .columns:not(.is-desktop) {
+        display: flex;
+    }
+
+    .card img {
+        height: 60vw;
     }
 }
