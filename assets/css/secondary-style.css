@@ -1,0 +1,126 @@
+
+* {font-family: 'Bangers', cursive;
+    font-size: 20px;
+ }
+
+/* Background Image styles */
+html {
+    background-color: #485fc7;
+}
+
+/* Section styles */
+section h2 {
+    border-bottom: 1.5px solid gold;
+}
+
+/* List Container styles */
+.list-container {
+    border-radius: 5px;
+    min-height: 200px;
+    width: 100%;
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 13vw);
+    justify-content: space-between;
+    align-content: start;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Card styles */
+.card-content {
+    padding: 0.75rem;
+}
+
+/* This ensures that movies with long titles will not wrap to the next line */
+.card-content p {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* This ensures that posters with different dimensions will all have the same proportions in the cards */
+.card img {
+    width: 100%;
+    height: 20vw;
+    object-fit: cover;
+}
+/* Card styles End*/
+
+/* Modal styles */
+#modal-poster-img {
+    width: 40%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.modal-card-title {
+    line-height: 1.5;
+}
+
+#movie-modal h3 {
+    font-size: 1.23em;
+    font-weight: bold;
+}
+/* Modal Styles End */
+
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
+@media screen and (max-width: 1023px) {
+    /* Try not to touch this or else the navbar will break on smaller screens! */
+    .navbar-menu {
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar-brand {
+        justify-content: center;
+    }
+
+    .navbar-start {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .list-container {
+        grid-template-columns: repeat(auto-fill, 20vw);
+        gap: 1rem;
+    }
+
+    .card img {
+        height: 30vw;
+    }
+
+    .card-content, .card-footer-item {
+        padding: 0.5rem;
+    }
+
+    #modal-poster-img {
+        min-width: 50%;
+    }
+}
+
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
+@media screen and (max-width: 768px) {
+    .list-container {
+        grid-template-columns: repeat(auto-fill, 25vw);
+    }
+
+    .card img {
+        height: 37vw;
+    }
+}
+
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .list-container {
+        grid-template-columns: repeat(auto-fill, 35vw);
+    }
+
+    .card img {
+        height: 53vw;
+    }
+}

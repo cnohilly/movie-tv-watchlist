@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/secondary-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <title>My WatchList</title>
+</head>
+
+<body>
+
+    <!--Navigation Bar-->
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+
+        <div class="navbar-brand has-background-black">
+            <h1 class="navbar-item has-text-light" id="nav-logo">
+                Team One
+            </h1>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item has-text-centered" id="nav-pop-mov" href="./index.html">
+                    Home
+                </a>
+                <a class="navbar-item has-text-centered" id="nav-pop-mov" href="#plan-to-watch-section">
+                    Plan To Watch
+                </a>
+                <a class="navbar-item has-text-centered" id="nav-pop-mov" href="#in-progress-section">
+                    In Progress
+                </a>
+                <a class="navbar-item has-text-centered" id="nav-pop-mov" href="#completed-section">
+                    Completed
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Card Template -->
+    <div class="is-hidden card-template">
+        <div class="content-card">
+            <div class="card">
+                <div class="card-image has-text-centered card-info">
+                    <img class="poster" src="./assets/images/spiderman-poster-test.jpg" alt="">
+                </div>
+                <div class="card-content card-info">
+                    <p class="content-title">Fast and Furious</p>
+                    <p class="title is-size-5 content-date">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <div class="card-footer-item">
+                        <p class="has-text-blue">Remove</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- Card Template End -->
+
+    <!-- Plan To Watch Section-->
+    <section id="plan-to-watch-section" class="section py-4">
+        <h2 class="has-text-light is-size-3-desktop is-size-4-touch mb-3">Plan To Watch</h2>
+        <ul id="plan-to-watch-list" class="list-container card-container">
+            <div class="content-card">
+                <div class="card">
+                    <div class="card-image has-text-centered">
+                        <img src="./assets/images/spiderman-poster-test.jpg" alt="">
+                    </div>
+                    <div class="card-content">
+                        <p>Fast and Furious 1</p>
+                        <p class="title is-size-5">2001</p>
+                    </div>
+                    <footer class="card-footer">
+                        <p class="card-footer-item">
+                            <a href="" class="has-text-blue">Remove</a>
+                        </p>
+                    </footer>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/avatar-way-of-water-poster.png" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 2</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/batman.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 3</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/thor.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 4</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/stranger things.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 5</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/demon-slayer.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 6</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/your name.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 7</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/dr strange.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 8</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/jurassic world.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 9</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/avengers.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 10</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+        </ul>
+    </section>
+
+    <!-- In Progress Section -->
+    <section id="in-progress-section" class="section py-4">
+        <h2 class="has-text-light is-size-3-desktop is-size-4-touch mb-3">In Progress</h2>
+        <ul id="in-progress-list" class="list-container">
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/spiderman-poster-test.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+            <div class="card">
+                <div class="card-image has-text-centered">
+                    <img src="./assets/images/avatar-way-of-water-poster.png" alt="">
+                </div>
+                <div class="card-content">
+                    <p>Fast and Furious 2</p>
+                    <p class="title is-size-5">2001</p>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="" class="has-text-blue">Remove</a>
+                    </p>
+                </footer>
+            </div>
+        </ul>
+    </section>
+
+    <!-- Completed Section-->
+    <section id="completed-section" class="section py-4">
+        <h2 class="has-text-light is-size-3-desktop is-size-4-touch mb-3">Completed</h2>
+        <ul id="completed-list" class="list-container">
+        </ul>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="has-background-black has-text-white has-text-centered p-5 mt-6 is-size-4">
+        <h2>Made by Kyle Tang, Stephon Treadwell, Chris Nohilly, and Daniel Wormald</h2>
+        <p class="pt-3">&copy; 2022 Team One, Inc.</p>
+    </footer>
+
+    <!-- Modal -->
+    <!-- To display modal, add 'is-active' to 'class="modal"' -->
+    <div id="movie-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head is-flex is-flex-direction-column is-flex-wrap-wrap has-background-info-dark">
+                <!-- Modal title -->
+                <h2 class="modal-card-title has-text-weight-bold has-text-white">Spider-Man: No Way Home</h2>
+            </header>
+            <section class="modal-card-body has-background-dark has-text-white">
+                <div class="is-flex is-flex-direction-row">
+                    <!-- Modal image -->
+                    <img id="modal-poster-img" class="m-2" src="./assets/images/spiderman-poster-test.jpg" alt="">
+                    <ul class="m-2 is-flex is-flex-wrap-wrap is-flex-direction-column">
+                        <!-- Modal content -->
+                        <li id="modal-release">
+                            <h3>Release:</h3>
+                            <p>2021</p>
+                        </li>
+                        <li id="modal-type">
+                            <h3>Type:</h3>
+                            <p>Movie</p>
+                        </li>
+                        <li id="modal-genre">
+                            <h3>Genre:</h3>
+                            <p>Action, Adventure, Science Fiction</p>
+                        </li>
+                        <li id="modal-popularity">
+                            <h3>Popularity:</h3>
+                            <p>81%</p>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Modal description -->
+                <div id="modal-movie-description" class="m-2">
+                    <h3>Description:</h3>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi distinctio sunt, obcaecati magnam
+                        aut ex
+                        dolorum eius dolores dolor nam ad nostrum sed iure, nulla consequuntur dignissimos fuga,
+                        aspernatur dolore?
+                    </p>
+                </div>
+            </section>
+            <footer class="modal-card-foot is-flex is-flex is-justify-content-space-between has-background-info-dark">
+                <button id="modal-watchlist-btn" class="button is-success">Remove From Watchlist</button>
+                <button id="modal-cancel-btn" class="button is-danger">Cancel</button>
+            </footer>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/watchlist-page.js"></script>
+</body>
+
+</html>

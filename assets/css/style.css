@@ -1,0 +1,86 @@
+* , #search {font-family: 'Bangers', cursive;
+   font-size: 20px;
+}
+
+#search-input {
+    font-size: 1rem;
+    height: 2.5em;
+    border-radius: 5px;
+}
+
+.radio{
+     margin-left: 1rem;
+}
+
+#movie-searchable {
+    margin-top: 35px;
+}
+
+.section {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+}
+
+section img {
+    width: 200px;
+}
+
+.card {
+    transition: 250ms all;
+    cursor: pointer;
+}
+.card:hover {
+    transform: scale(1.2); 
+}
+
+/* Modal Styles */
+#movie-modal section img {
+    width: 40%;
+    transition: none;
+}
+
+#movie-modal img:hover {
+    margin-left: 0;
+    transform: none;
+    cursor: default;
+}
+
+#modal-poster-img {
+    width: 40%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.modal-card-title {
+    line-height: 1.5;
+}
+
+#movie-modal h3 {
+    font-size: 1.23em;
+    font-weight: bold;
+}
+/* Modal Styles End */
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+/* Try not to touch this or else the navbar will break on smaller screens! */
+@media screen and (max-width: 1023px) {
+    .navbar-menu {
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar-brand {
+        justify-content: center;
+    }
+
+    .navbar-start {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #modal-poster-img {
+        min-width: 50%;
+    }
+}

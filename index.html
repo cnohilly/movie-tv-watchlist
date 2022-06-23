@@ -1,16 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <title>Movie WatchList</title>
 </head>
+
 <body>
+
+    <!--Navigation Bar-->
+
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand has-background-black">
+			<h1 class="navbar-item has-background-black has-text-light" id="nav-logo">
+				Team One
+			</h1>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+        	<div class="navbar-start">
+
+				<a class="navbar-item has-text-centered has-background-light" id="nav-pop-mov" href="./watchlist.html">
+					Watchlist
+				</a>
+
+				<a class="navbar-item has-text-centered has-background-light" id="nav-pop-mov" href="#popular-movies">
+					Popular Movies
+				</a>
+
+				<a class="navbar-item has-text-centered has-background-light" id="nav-pop-tv" href="#popular-tv">
+					Popular TV Shows
+				</a>
+		
+				<a class="navbar-item has-text-centered has-background-light" id="nav-watchlist" href="#top-movies">
+					Top Rated Movies
+				</a>
+
+                <a class="navbar-item has-text-centered has-background-light" id="nav-watchlist" href="#top-tv">
+					Top Rated TV Shows
+				</a>
+
+			</div>
+        </div>
+    </nav>
+
+    <!--Hero Section-->
+    <section class="hero is-medium is-link">
+        <div class="hero-body">
+			<p class="title has-text-black">
+				Welcome.
+			</p>
+			<p class="subtitle has-text-light">
+				"Tons of movies and Tv shows to build your <strong class="has-text-black">WatchList!</strong> Enjoy!"
+			</p>
+        </div>
+        <form class="columns is-desktop" id="inner-search-form" action="/search" method="get" accept-charset="utf-8">
+        	<label class="column">
+            <div class="control column is-full form-group">
+            	<input class="input is-rounded" type="text" placeholder="Search for a movie or tv show" id="inputValue">
+                
+            </div>
+            <div class="buttons column">
+                <button class="button is-black mb-1" type="submit" id="search">Search</button>
+            </div>
+        	</label>
+			<div class="control column">
+                <p class="mb-2 ml-3 has-text-black">Choose Catergory To Search</p>
+                <label class="radio mt-1 mr-5">
+                  <input type="radio" name="answer" checked>
+                  Movies
+                </label>
+                <label class="radio">
+                  <input type="radio" name="answer">
+                  TV Shows
+                </label>
+            </div>
+        </form>
+    </section>
+    <!--End of Hero Section-->
+
+    <!-- Card Template -->
+    <div class="is-hidden card-template">
+        <div class="column is-3-table is-3-desktop content-card">
+            <div class="card" data-content-type="0" data-content-id="0">
+                <div class="card-image has-text-centered card-info">
+                    <img class="poster" src="" alt="">
+                </div>
+                <div class="card-content card-info">
+                    <p class="content-title"></p>
+                    <p class="title is-size-5 content-date"></p>
+                </div>
+                <div class="card-footer">
+                    <p class="card-footer-item">Add to Watchlist</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Card Template End -->
     
+    <!--Search Results Cards-->
+    <section class="section is-hidden" id="search-section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4 search-results">Search Results</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="search-results-container">
+            </div>
+        </div>
+    </section>
+    <!--End of Search Results Cards-->
+    
+    <!--Popular Movies-->
+    <section class="section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4" id="popular-movies">Popular Movies</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="pop-movies-container">
+            </div>
+        </div>
+    </section>
+    <!--End of Popular Movies-->
+    
+    <!--Popular Tv Shows-->
+    <section class="section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4" id="popular-tv">Popular TV</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="pop-tv-container">
+            </div>
+        </div>
+    </section>
+    <!--End of Popular Tv Shows-->
+    
+    <!--Start of Top Rated Movies -->
+    <section class="section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4" id="top-movies">Top Rated Movies</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="top-movies-container">
+            </div>
+        </div>
+    </section>
+    <!--End of Top Rated Movies -->
+    
+    <!--Start of Top Rated TV -->
+    <section class="section">
+        <div class="container">
+            <h3 class="title has-text-centered is-size-4" id="top-tv">Top Rated TV Shows</h3>
+            <div class="columns mt-5 is-8 is-variable card-container" id="top-tv-container">
+            </div>
+        </div>
+    </section>
+    <!--End of Top Rated TV-->
+
+    <!-- Footer Section -->
+    <footer class="has-background-black has-text-white has-text-centered p-5 mt-6 is-size-4">
+        <h2>Made by Kyle Tang, Stephon Treadwell, Chris Nohilly, and Daniel Wormald</h2>
+        <p class="pt-3">&copy; 2022 Team One, Inc.</p>
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- Modal -->
+    <!-- To display modal, add 'is-active' to modal class -->
+    <div id="movie-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card" data-content-id="" data-content-type="">
+            <header class="modal-card-head is-flex is-flex-direction-column is-flex-wrap-wrap has-background-info-dark">
+                <!-- Modal title -->
+                <h2 class="modal-card-title has-text-weight-bold has-text-white">Spider-Man: No Way Home</h2>
+            </header>
+            <section class="modal-card-body has-background-dark has-text-white">
+                <div class="is-flex is-flex-direction-row">
+                    <!-- Modal image -->
+                    <img id="modal-poster-img" class="m-2" src="./assets/images/spiderman-poster-test.jpg" alt="">
+                    <ul class="m-2 is-flex is-flex-wrap-wrap is-flex-direction-column">
+                        <!-- Modal content -->
+                        <li id="modal-release">
+                            <h3>Release:</h3>
+                            <p>2021</p>
+                        </li>
+                        <li id="modal-type">
+                            <h3>Type:</h3>
+                            <p>Movie</p>
+                        </li>
+                        <li id="modal-genre">
+                            <h3>Genre:</h3>
+                            <p>Action, Adventure, Science Fiction</p>
+                        </li>
+                        <li id="modal-popularity">
+                            <h3>Popularity:</h3>
+                            <p>81%</p>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Modal description -->
+                <div id="modal-movie-description" class="m-2">
+                    <h3>Description:</h3>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi distinctio sunt, obcaecati magnam
+                        aut ex
+                        dolorum eius dolores dolor nam ad nostrum sed iure, nulla consequuntur dignissimos fuga,
+                        aspernatur dolore?
+                    </p>
+                </div>
+            </section>
+            <footer class="modal-card-foot is-flex is-flex is-justify-content-space-between has-background-info-dark">
+                <button id="modal-watchlist-btn" class="button is-success">Add to Watchlist</button>
+                <button id="modal-cancel-btn" class="button is-danger">Cancel</button>
+            </footer>
+        </div>
+    </div>
+    <!-- Modal End -->
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="script.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/search-page.js"></script>
 </body>
 </html>
+
+
