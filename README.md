@@ -33,6 +33,6 @@ On the watch list page, the user will be able to see everything they added to to
 
 ## Link
 
-<a href="cnohilly.github.io/movie-tv-watchlist/"></a>
+This is a link to the deployed application: [Watchlist] (https://cnohilly.github.io/movie-tv-watchlist/index.html)
 
 
