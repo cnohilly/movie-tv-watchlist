@@ -9,9 +9,7 @@ var watchlist = [];
 // converts and saves the watchlist to localstorage with just the id and content type
 var saveWatchlist = function () {
     // will not save anything if the watchlist is empty
-    if (watchlist.length > 0) {
-        localStorage.setItem(localstorageKey, JSON.stringify(watchlist));
-    }
+    localStorage.setItem(localstorageKey, JSON.stringify(watchlist));
 }
 
 // creates an object with the relevant information from the data provided
@@ -34,7 +32,7 @@ var createContentObj = function (data, type) {
     }
     if (data.genres) {
         var genres = [];
-        data.genres.forEach(function(genre){
+        data.genres.forEach(function (genre) {
             genres.push(genre.name);
         });
         contentObj.genres = genres;
@@ -83,7 +81,7 @@ var getDetails = function (id, type, func) {
 
 // loops through the array of data to pass information to call the api and create cards
 var createContentCards = function (data, type, func) {
-    data.forEach(function(content){
+    data.forEach(function (content) {
         getDetails(content.id, type, func);
     });
 }
@@ -98,6 +96,17 @@ var displayModal = function (active) {
     }
 }
 
+var setModalBtnColor = function(id){
+    var btn = $('#modal-watchlist-btn');
+    if(checkInWatchlist(id)){
+        btn.removeClass('is-success');
+        btn.addClass('is-danger');
+    } else {
+        btn.addClass('is-success');
+        btn.removeClass('is-danger');
+    }
+}
+
 // updates the information for the content modal and displays it
 var createModal = function (contentObj) {
     $('.modal-card').attr('data-content-id', contentObj.id).attr('data-content-type', contentObj.type);
@@ -109,6 +118,7 @@ var createModal = function (contentObj) {
     $('#modal-popularity p').text(contentObj.popularity * 10 + '%');
     $('#modal-movie-description p').text(contentObj.overview);
     $('#modal-watchlist-btn').text(contentButtonText(contentObj.id));
+    setModalBtnColor(contentObj.id);
     displayModal(true);
 }
 
