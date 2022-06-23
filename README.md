@@ -33,6 +33,6 @@ On the watch list page, the user will be able to see everything they added to to
 
 ## Link
 
-cnohilly.github.io/movie-tv-watchlist/
+cnohilly.github.io/movie-tv-watchlist/ 
 
 
